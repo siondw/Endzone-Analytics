@@ -16,9 +16,10 @@ CREATE TABLE NFLTeams(
 
 CREATE TABLE Team_Picks(
    team_abbr  varchar(3),
-   pick_num int UNIQUE,
+   pick_id int AUTO_INCREMENT,
+   pick_num int,
    year int,
-   PRIMARY KEY (team_abbr, pick_num),
+   PRIMARY KEY (team_abbr, pick_id),
    CONSTRAINT FOREIGN KEY (team_abbr) REFERENCES NFLTeams(team_abbr) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
@@ -38,7 +39,7 @@ CREATE TABLE Game (
    yards_leader varchar(50),
    td_leader varchar(50),
    pass_yds_leader varchar(50),
-   week char(1),
+   week_num char(1),
    ticket_price int,
    CONSTRAINT FOREIGN KEY (home_team_abbr) REFERENCES NFLTeams(team_abbr) ON DELETE RESTRICT ON UPDATE CASCADE,
    CONSTRAINT FOREIGN KEY (away_team_abbr) REFERENCES NFLTeams(team_abbr) ON DELETE RESTRICT ON UPDATE CASCADE
@@ -78,7 +79,7 @@ CREATE TABLE Players(
    name varchar(50),
    team_abbr varchar(3) NOT NULL,
    INDEX (team_abbr),
-   position varchar (50),
+   position varchar (4),
    qbr double,
    pass_yards_total int,
    rush_yards_total int,
