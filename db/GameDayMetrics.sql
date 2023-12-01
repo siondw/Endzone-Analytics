@@ -1,7 +1,7 @@
 CREATE DATABASE GAMEDAYMETRICS;
 USE GAMEDAYMETRICS;
 CREATE TABLE NFLTeams(
-   abbr  varchar(3) PRIMARY KEY AUTO_INCREMENT,
+   team_abbr  varchar(3) PRIMARY KEY AUTO_INCREMENT,
    name varchar(50),
    division varchar(50),
    conference varchar(50),
@@ -15,20 +15,20 @@ CREATE TABLE NFLTeams(
 );
 
 CREATE TABLE Team_Picks(
-   abbr  varchar(3),
+   team_abbr  varchar(3),
    pick_num int UNIQUE,
    year int,
-   PRIMARY KEY (abbr, pick_num),
-   CONSTRAINT FOREIGN KEY (abbr) REFERENCES NFLTeams(abbr) ON DELETE RESTRICT ON UPDATE CASCADE
+   PRIMARY KEY (team_abbr, pick_num),
+   CONSTRAINT FOREIGN KEY (team_abbr) REFERENCES NFLTeams(team_abbr) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 
 CREATE TABLE Game (
    game_id int PRIMARY KEY AUTO_INCREMENT,
-   home_abbr varchar(3) NOT NULL,
-   INDEX(home_abbr),
-   away_abbr int NOT NULL,
-   INDEX(away_abbr),
+   home_team_abbr varchar(3) NOT NULL,
+   INDEX(home_team_abbr),
+   away_team_abbr int NOT NULL,
+   INDEX(away_team_abbr),
    winner int NOT NULL,
    INDEX(winner),
    loser int NOT NULL,
@@ -37,16 +37,18 @@ CREATE TABLE Game (
    away_score int,
    yards_leader varchar(50),
    td_leader varchar(50),
-   int_leader varchar(50),
-   CONSTRAINT FOREIGN KEY (home_abbr) REFERENCES NFLTeams(abbr) ON DELETE RESTRICT ON UPDATE CASCADE,
-   CONSTRAINT FOREIGN KEY (away_abbr) REFERENCES NFLTeams(abbr) ON DELETE RESTRICT ON UPDATE CASCADE
+   pass_yds_leader varchar(50),
+   week char(1),
+   ticket_price int,
+   CONSTRAINT FOREIGN KEY (home_team_abbr) REFERENCES NFLTeams(team_abbr) ON DELETE RESTRICT ON UPDATE CASCADE,
+   CONSTRAINT FOREIGN KEY (away_team_abbr) REFERENCES NFLTeams(team_abbr) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 CREATE TABLE Team_Game(
-   abbr varchar(3),
+   team_abbr varchar(3),
    game_id int,
-   PRIMARY KEY (abbr, game_id),
-   CONSTRAINT FOREIGN KEY (abbr) REFERENCES NFLTeams(abbr) ON DELETE RESTRICT ON UPDATE CASCADE,
+   PRIMARY KEY (team_abbr, game_id),
+   CONSTRAINT FOREIGN KEY (team_abbr) REFERENCES NFLTeams(team_abbr) ON DELETE RESTRICT ON UPDATE CASCADE,
    CONSTRAINT FOREIGN KEY (game_id) REFERENCES Game(game_id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
@@ -62,44 +64,47 @@ CREATE TABLE Game_Highlight(
 
 CREATE TABLE Play_by_Play(
    game_id int,
+   play_id int AUTO_INCREMENT,
    play_summary varchar(200),
-   PRIMARY KEY (game_id, play_summary),
+   time varchar(10),
+   quarter int,
+   PRIMARY KEY (game_id, play_id),
    CONSTRAINT FOREIGN KEY (game_id) REFERENCES Game(game_id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 
 CREATE TABLE Players(
    player_id int PRIMARY KEY AUTO_INCREMENT,
-   abbr varchar(3) NOT NULL,
-   INDEX (abbr),
-   games_played int,
-   total_tds_line varchar(50),
-   total_tds_odds varchar(50),
-   school varchar (50),
-   tackle_eff double,
-   qbr double,
-   total_yds_line varchar(50),
-   total_yds_odds varchar(50),
-   shuttle_time double,
    name varchar(50),
+   team_abbr varchar(3) NOT NULL,
+   INDEX (team_abbr),
    position varchar (50),
+   qbr double,
    pass_yards_total int,
    rush_yards_total int,
    rec_yards_total int,
    rush_tds_total int,
    pass_tds_total int,
    rec_tds_total int,
+   games_played int,
+   total_tds_line varchar(50),
+   total_tds_odds varchar(50),
+   school varchar (50),
+   total_yds_line varchar(50),
+   total_yds_odds varchar(50),
+   shuttle_time double,
    forty_time double,
    bench_presses int,
-   CONSTRAINT FOREIGN KEY (abbr) REFERENCES NFLTeams(abbr) ON DELETE RESTRICT ON UPDATE CASCADE
+   CONSTRAINT FOREIGN KEY (team_abbr) REFERENCES NFLTeams(team_abbr) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 
 CREATE TABLE Player_Injuries(
    player_id int,
+   injury_id int AUTO_INCREMENT,
    injury varchar(200),
    duration varchar(50),
-   PRIMARY KEY (player_id, injury),
+   PRIMARY KEY (player_id, injury_id),
    CONSTRAINT FOREIGN KEY (player_id) REFERENCES Players(player_id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
