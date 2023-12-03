@@ -6,7 +6,7 @@ from src import db
 products = Blueprint('teams', __name__)
 
 # Get all the products from the database
-@teams.route('/team', methods=['GET'])
+@teams.route('/teams', methods=['GET'])
 def get_teams():
     # get a cursor object from the database
     cursor = db.get_db().cursor()
