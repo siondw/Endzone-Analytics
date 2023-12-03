@@ -28,7 +28,7 @@ CREATE TABLE Game (
    game_id int PRIMARY KEY AUTO_INCREMENT,
    home_team_abbr varchar(3) NOT NULL,
    INDEX(home_team_abbr),
-   away_team_abbr int NOT NULL,
+   away_team_abbr varchar(3) NOT NULL,
    INDEX(away_team_abbr),
    winner int NOT NULL,
    INDEX(winner),
