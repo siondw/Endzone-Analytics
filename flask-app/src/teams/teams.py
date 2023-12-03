@@ -6,7 +6,7 @@ from src import db
 teams = Blueprint('teams', __name__)
 
 # Get all teams from the DB
-@teams.route('/NFLTeams', methods=['GET'])
+@teams.route('/teams', methods=['GET'])
 def get_teams():
     cursor = db.get_db().cursor()
     cursor.execute('SELECT team_abbr, name, division, conference,salary_cap,third_conv_rate,redzone_eff,avg_ticket_price,wins,losses,win_pct FROM NFLTeams')
