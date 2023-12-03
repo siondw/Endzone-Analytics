@@ -17,18 +17,17 @@ CREATE DATABASE GameDayMetrics;
 
 USE GameDayMetrics;
 CREATE TABLE NFLTeams(
-   team_abbr varchar(3),
-   index(team_abbr),
-   name varchar(50),
-   division varchar(50),
-   conference varchar(50),
-   salary_cap int,
-   third_conv_rate DOUBLE,
-   redzone_eff DOUBLE,
-   avg_ticket_price DOUBLE,
-   wins int,
-   losses int,
-   win_pct DOUBLE GENERATED ALWAYS AS (wins / (wins + losses)) STORED
+    team_abbr VARCHAR(3) PRIMARY KEY,
+    name VARCHAR(50),
+    division VARCHAR(50),
+    conference VARCHAR(50),
+    salary_cap INT,
+    third_conv_rate DOUBLE,
+    redzone_eff DOUBLE,
+    avg_ticket_price DOUBLE,
+    wins INT,
+    losses INT,
+    win_pct DOUBLE GENERATED ALWAYS AS (wins / (wins + losses)) STORED
 );
 
 CREATE TABLE Team_Picks (
@@ -43,24 +42,24 @@ CREATE TABLE Team_Picks (
 
 
 CREATE TABLE Game (
-   game_id int PRIMARY KEY AUTO_INCREMENT,
-   home_team_abbr varchar(3) NOT NULL,
-   INDEX(home_team_abbr),
-   away_team_abbr varchar(3) NOT NULL,
-   INDEX(away_team_abbr),
-   winner int NOT NULL,
-   INDEX(winner),
-   loser int NOT NULL,
-   INDEX(loser),
-   home_score int,
-   away_score int,
-   yards_leader varchar(50),
-   td_leader varchar(50),
-   pass_yds_leader varchar(50),
-   week_num char(1),
-   ticket_price int,
-   CONSTRAINT FOREIGN KEY (home_team_abbr) REFERENCES NFLTeams(team_abbr) ON DELETE RESTRICT ON UPDATE CASCADE,
-   CONSTRAINT FOREIGN KEY (away_team_abbr) REFERENCES NFLTeams(team_abbr) ON DELETE RESTRICT ON UPDATE CASCADE
+    game_id INT PRIMARY KEY AUTO_INCREMENT,
+    home_team_abbr VARCHAR(3) NOT NULL,
+    INDEX(home_team_abbr),
+    away_team_abbr VARCHAR(3) NOT NULL,
+    INDEX(away_team_abbr),
+    winner VARCHAR(50) NOT NULL,
+    INDEX(winner),
+    loser VARCHAR(50) NOT NULL,
+    INDEX(loser),
+    home_score INT NOT NULL,
+    away_score INT NOT NULL,
+    yards_leader VARCHAR(50),
+    td_leader VARCHAR(50),
+    pass_yds_leader VARCHAR(50),
+    week_num TINYINT,
+    ticket_price INT,
+    CONSTRAINT FOREIGN KEY (home_team_abbr) REFERENCES NFLTeams(team_abbr) ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT FOREIGN KEY (away_team_abbr) REFERENCES NFLTeams(team_abbr) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 CREATE TABLE Team_Game(
@@ -778,38 +777,39 @@ INSERT INTO Players (player_id, name, team_abbr, position, qbr, pass_yards_total
 INSERT INTO Players (player_id, name, team_abbr, position, qbr, pass_yards_total, rush_yards_total, rec_yards_total, rush_tds_total, pass_tds_total, rec_tds_total, games_played, total_tds_line, total_tds_odds, school, total_yds_line, total_yds_odds, shuttle_time, forty_time, bench_presses) VALUES (628, 'Cole Turner', 'WAS', 'TE', 0, 0, 0, 23, 0, 0, 0, 10, 9.5, '-102', 'Akron', 637.5, +100, 6.35, 4.27);										
 
 --TEAMS
-INSERT INTO NFLTeams (team_abbr, name, division, conference, salary_cap, third_conv_rate, redzone_eff, avg_ticket_price, wins, losses) VALUES ('AZ', 'Arizona Cardinals', 'NFC West', 'NFC', 7863982, 0.46, 0.51, 94, 5, 12, 0.294);						
-INSERT INTO NFLTeams (team_abbr, name, division, conference, salary_cap, third_conv_rate, redzone_eff, avg_ticket_price, wins, losses) VALUES ('ATL', 'Atlanta Falcons', 'NFC South', 'NFC', 39410705, 0.34, 0.64, 112, 4, 13, 0.235);						
-INSERT INTO NFLTeams (team_abbr, name, division, conference, salary_cap, third_conv_rate, redzone_eff, avg_ticket_price, wins, losses) VALUES ('BAL', 'Baltimore Ravens', 'AFC North', 'AFC', 26727883, 0.34, 0.59, 95, 11, 6, 0.647);						
-INSERT INTO NFLTeams (team_abbr, name, division, conference, salary_cap, third_conv_rate, redzone_eff, avg_ticket_price, wins, losses) VALUES ('BUF', 'Buffalo Bills', 'AFC East', 'AFC', 1759639, 0.46, 0.54, 123, 10, 7, 0.588);						
-INSERT INTO NFLTeams (team_abbr, name, division, conference, salary_cap, third_conv_rate, redzone_eff, avg_ticket_price, wins, losses) VALUES ('CAR', 'Carolina Panthers', 'NFC South', 'NFC', 28756204, 0.38, 0.44, 81, 5, 12, 0.294);						
-INSERT INTO NFLTeams (team_abbr, name, division, conference, salary_cap, third_conv_rate, redzone_eff, avg_ticket_price, wins, losses) VALUES ('CHI', 'Chicago Bears', 'NFC North', 'NFC', 10672710, 0.47, 0.53, 66, 8, 9, 0.471);						
-INSERT INTO NFLTeams (team_abbr, name, division, conference, salary_cap, third_conv_rate, redzone_eff, avg_ticket_price, wins, losses) VALUES ('CIN', 'Cincinnati Bengals', 'AFC North', 'AFC', 10392379, 0.42, 0.62, 121, 10, 7, 0.588);						
-INSERT INTO NFLTeams (team_abbr, name, division, conference, salary_cap, third_conv_rate, redzone_eff, avg_ticket_price, wins, losses) VALUES ('CLE', 'Cleveland Browns', 'AFC North', 'AFC', 15166744, 0.41, 0.54, 100, 7, 10, 0.412);						
-INSERT INTO NFLTeams (team_abbr, name, division, conference, salary_cap, third_conv_rate, redzone_eff, avg_ticket_price, wins, losses) VALUES ('DAL', 'Dallas Cowboys', 'NFC East', 'NFC', 15767186, 0.51, 0.53, 134, 12, 5, 0.706);						
-INSERT INTO NFLTeams (team_abbr, name, division, conference, salary_cap, third_conv_rate, redzone_eff, avg_ticket_price, wins, losses) VALUES ('DEN', 'Denver Broncos', 'AFC West', 'AFC', 26620196, 0.38, 0.62, 60, 7, 10, 0.412);						
-INSERT INTO NFLTeams (team_abbr, name, division, conference, salary_cap, third_conv_rate, redzone_eff, avg_ticket_price, wins, losses) VALUES ('DET', 'Detroit Lions', 'NFC North', 'NFC', 31155299, 0.36, 0.61, 120, 3, 14, 0.176);						
-INSERT INTO NFLTeams (team_abbr, name, division, conference, salary_cap, third_conv_rate, redzone_eff, avg_ticket_price, wins, losses) VALUES ('GB', 'Green Bay Packers', 'NFC North', 'NFC', 22354690, 0.52, 0.63, 136, 13, 4, 0.765);						
-INSERT INTO NFLTeams (team_abbr, name, division, conference, salary_cap, third_conv_rate, redzone_eff, avg_ticket_price, wins, losses) VALUES ('HOU', 'Houston Texans', 'AFC South', 'AFC', 24725939, 0.47, 0.53, 119, 4, 13, 0.235);						
-INSERT INTO NFLTeams (team_abbr, name, division, conference, salary_cap, third_conv_rate, redzone_eff, avg_ticket_price, wins, losses) VALUES ('IND', 'Indianapolis Colts', 'AFC South', 'AFC', 24060729, 0.4, 0.61, 89, 9, 8, 0.529);						
-INSERT INTO NFLTeams (team_abbr, name, division, conference, salary_cap, third_conv_rate, redzone_eff, avg_ticket_price, wins, losses) VALUES ('JAC', 'Jacksonville Jaguars', 'AFC South', 'AFC', 13932528, 0.46, 0.45, 129, 2, 15, 0.118);						
-INSERT INTO NFLTeams (team_abbr, name, division, conference, salary_cap, third_conv_rate, redzone_eff, avg_ticket_price, wins, losses) VALUES ('KC', 'Kansas City Chiefs', 'AFC West', 'AFC', 28888331, 0.52, 0.45, 98, 14, 3, 0.824);						
-INSERT INTO NFLTeams (team_abbr, name, division, conference, salary_cap, third_conv_rate, redzone_eff, avg_ticket_price, wins, losses) VALUES ('LV', 'Las Vegas Raiders', 'AFC West', 'AFC', 6143321, 0.41, 0.53, 100, 8, 9, 0.471);						
-INSERT INTO NFLTeams (team_abbr, name, division, conference, salary_cap, third_conv_rate, redzone_eff, avg_ticket_price, wins, losses) VALUES ('LAC', 'Los Angeles Chargers', 'AFC West', 'AFC', 15220613, 0.39, 0.52, 117, 9, 8, 0.529);						
-INSERT INTO NFLTeams (team_abbr, name, division, conference, salary_cap, third_conv_rate, redzone_eff, avg_ticket_price, wins, losses) VALUES ('LAR', 'Los Angeles Rams', 'NFC West', 'NFC', 23093842, 0.47, 0.66, 96, 12, 5, 0.706);						
-INSERT INTO NFLTeams (team_abbr, name, division, conference, salary_cap, third_conv_rate, redzone_eff, avg_ticket_price, wins, losses) VALUES ('MIA', 'Miami Dolphins', 'AFC East', 'AFC', 34998831, 0.37, 0.45, 74, 9, 8, 0.529);						
-INSERT INTO NFLTeams (team_abbr, name, division, conference, salary_cap, third_conv_rate, redzone_eff, avg_ticket_price, wins, losses) VALUES ('MIN', 'Minnesota Vikings', 'NFC North', 'NFC', 13680005, 0.44, 0.51, 138, 7, 10, 0.412);						
-INSERT INTO NFLTeams (team_abbr, name, division, conference, salary_cap, third_conv_rate, redzone_eff, avg_ticket_price, wins, losses) VALUES ('NE', 'New England Patriots', 'AFC East', 'AFC', 24577700, 0.41, 0.54, 73, 10, 7, 0.588);						
-INSERT INTO NFLTeams (team_abbr, name, division, conference, salary_cap, third_conv_rate, redzone_eff, avg_ticket_price, wins, losses) VALUES ('NO', 'New Orleans Saints', 'NFC South', 'NFC', 21294905, 0.46, 0.56, 72, 9, 8, 0.529);						
-INSERT INTO NFLTeams (team_abbr, name, division, conference, salary_cap, third_conv_rate, redzone_eff, avg_ticket_price, wins, losses) VALUES ('NYG', 'New York Giants', 'NFC East', 'NFC', 22459705, 0.52, 0.61, 64, 6, 11, 0.353);						
-INSERT INTO NFLTeams (team_abbr, name, division, conference, salary_cap, third_conv_rate, redzone_eff, avg_ticket_price, wins, losses) VALUES ('NYJ', 'New York Jets', 'AFC East', 'AFC', 11087158, 0.43, 0.57, 81, 2, 15, 0.118);						
-INSERT INTO NFLTeams (team_abbr, name, division, conference, salary_cap, third_conv_rate, redzone_eff, avg_ticket_price, wins, losses) VALUES ('PHI', 'Philadelphia Eagles', 'NFC East', 'NFC', 8709819, 0.4, 0.51, 71, 9, 8, 0.529);						
-INSERT INTO NFLTeams (team_abbr, name, division, conference, salary_cap, third_conv_rate, redzone_eff, avg_ticket_price, wins, losses) VALUES ('PIT', 'Pittsburgh Steelers', 'AFC North', 'AFC', 2147007, 0.53, 0.63, 130, 9, 8, 0.529);						
-INSERT INTO NFLTeams (team_abbr, name, division, conference, salary_cap, third_conv_rate, redzone_eff, avg_ticket_price, wins, losses) VALUES ('SF', 'San Francisco 49ers', 'NFC West', 'NFC', 13762192, 0.47, 0.48, 130, 6, 11, 0.353);						
-INSERT INTO NFLTeams (team_abbr, name, division, conference, salary_cap, third_conv_rate, redzone_eff, avg_ticket_price, wins, losses) VALUES ('SEA', 'Seattle Seahawks', 'NFC West', 'NFC', 39573185, 0.35, 0.49, 76, 12, 5, 0.706);						
-INSERT INTO NFLTeams (team_abbr, name, division, conference, salary_cap, third_conv_rate, redzone_eff, avg_ticket_price, wins, losses) VALUES ('TB', 'Tampa Bay Buccaneers', 'NFC South', 'NFC', 14431821, 0.38, 0.46, 117, 13, 4, 0.765);						
-INSERT INTO NFLTeams (team_abbr, name, division, conference, salary_cap, third_conv_rate, redzone_eff, avg_ticket_price, wins, losses) VALUES ('TEN', 'Tennessee Titans', 'AFC South', 'AFC', 30492076, 0.45, 0.53, 87, 12, 5, 0.706);						
-INSERT INTO NFLTeams (team_abbr, name, division, conference, salary_cap, third_conv_rate, redzone_eff, avg_ticket_price, wins, losses) VALUES ('WAS', 'Washington Commanders', 'NFC East', 'NFC', 20226615, 0.37, 0.46, 82, 7, 10, 0.412);		
+INSERT INTO NFLTeams (team_abbr, name, division, conference, salary_cap, third_conv_rate, redzone_eff, avg_ticket_price, wins, losses) VALUES 
+('AZ', 'Arizona Cardinals', 'NFC West', 'NFC', 7863982, 0.46, 0.51, 94, 5, 12),
+('ATL', 'Atlanta Falcons', 'NFC South', 'NFC', 39410705, 0.34, 0.64, 112, 4, 13),
+('BAL', 'Baltimore Ravens', 'AFC North', 'AFC', 26727883, 0.34, 0.59, 95, 11, 6),
+('BUF', 'Buffalo Bills', 'AFC East', 'AFC', 1759639, 0.46, 0.54, 123, 10, 7),
+('CAR', 'Carolina Panthers', 'NFC South', 'NFC', 28756204, 0.38, 0.44, 81, 5, 12),
+('CHI', 'Chicago Bears', 'NFC North', 'NFC', 10672710, 0.47, 0.53, 66, 8, 9),
+('CIN', 'Cincinnati Bengals', 'AFC North', 'AFC', 10392379, 0.42, 0.62, 121, 10, 7),
+('CLE', 'Cleveland Browns', 'AFC North', 'AFC', 15166744, 0.41, 0.54, 100, 7, 10),
+('DAL', 'Dallas Cowboys', 'NFC East', 'NFC', 15767186, 0.51, 0.53, 134, 12, 5),
+('DEN', 'Denver Broncos', 'AFC West', 'AFC', 26620196, 0.38, 0.62, 60, 7, 10),
+('DET', 'Detroit Lions', 'NFC North', 'NFC', 31155299, 0.36, 0.61, 120, 3, 14),
+('GB', 'Green Bay Packers', 'NFC North', 'NFC', 22354690, 0.52, 0.63, 136, 13, 4),
+('HOU', 'Houston Texans', 'AFC South', 'AFC', 24725939, 0.47, 0.53, 119, 4, 13),
+('IND', 'Indianapolis Colts', 'AFC South', 'AFC', 24060729, 0.4, 0.61, 89, 9, 8),
+('JAC', 'Jacksonville Jaguars', 'AFC South', 'AFC', 13932528, 0.46, 0.45, 129, 2, 15),
+('KC', 'Kansas City Chiefs', 'AFC West', 'AFC', 28888331, 0.52, 0.45, 98, 14, 3),
+('LV', 'Las Vegas Raiders', 'AFC West', 'AFC', 6143321, 0.41, 0.53, 100, 8, 9),
+('LAC', 'Los Angeles Chargers', 'AFC West', 'AFC', 15220613, 0.39, 0.52, 117, 9, 8),
+('LAR', 'Los Angeles Rams', 'NFC West', 'NFC', 23093842, 0.47, 0.66, 96, 12, 5),
+('MIA', 'Miami Dolphins', 'AFC East', 'AFC', 34998831, 0.37, 0.45, 74, 9, 8),
+('MIN', 'Minnesota Vikings', 'NFC North', 'NFC', 13680005, 0.44, 0.51, 138, 7, 10),
+('NE', 'New England Patriots', 'AFC East', 'AFC', 24577700, 0.41, 0.54, 73, 10, 7),
+('NO', 'New Orleans Saints', 'NFC South', 'NFC', 21294905, 0.46, 0.56, 72, 9, 8),
+('NYG', 'New York Giants', 'NFC East', 'NFC', 22459705, 0.52, 0.61, 64, 6, 11),
+('NYJ', 'New York Jets', 'AFC East', 'AFC', 11087158, 0.43, 0.57, 81, 2, 15),
+('PHI', 'Philadelphia Eagles', 'NFC East', 'NFC', 8709819, 0.4, 0.51, 71, 9, 8),
+('PIT', 'Pittsburgh Steelers', 'AFC North', 'AFC', 2147007, 0.53, 0.63, 130, 9, 8),
+('SF', 'San Francisco 49ers', 'NFC West', 'NFC', 13762192, 0.47, 0.48, 130, 6, 11),
+('SEA', 'Seattle Seahawks', 'NFC West', 'NFC', 39573185, 0.35, 0.49, 76, 12, 5),
+('TB', 'Tampa Bay Buccaneers', 'NFC South', 'NFC', 14431821, 0.38, 0.46, 117, 13, 4),
+('TEN', 'Tennessee Titans', 'AFC South', 'AFC', 30492076, 0.45, 0.53, 87, 12, 5),
+('WAS', 'Washington Commanders', 'NFC East', 'NFC', 20226615, 0.37, 0.46, 82, 7, 10);
 
 --TEAM PICKS
 INSERT INTO Team_Picks (team_abbr, pick_num, year) VALUES ('GB',1,2023);
@@ -1230,7 +1230,8 @@ INSERT INTO Team_Picks (team_abbr, pick_num, year) VALUES ('BAL',223,2024);
 INSERT INTO Team_Picks (team_abbr, pick_num, year) VALUES ('PHI',224,2024);
 
 --GAME
-INSERT INTO Game (game_id, home_team_abbr, away_team_abbr, winner, loser, home_score, away_score, yards_leader, td_leader, pass_yds_leader, week_num, ticket_price) VALUES (66,'ATL', 'NYJ', 'Atlanta Falcons', 'New York Jets', 27, 20, 'Bryan Edwards', 'Anthony Firkser', 'Marcus Mariota', 5, 321);											
+INSERT INTO Game (game_id, home_team_abbr, away_team_abbr, winner, loser, home_score, away_score, yards_leader, td_leader, pass_yds_leader, week_num, ticket_price) VALUES
+ (66,'ATL', 'NYJ', 'Atlanta Falcons', 'New York Jets', 27, 20, 'Bryan Edwards', 'Anthony Firkser', 'Marcus Mariota', 5, 321);											
 INSERT INTO Game (game_id, home_team_abbr, away_team_abbr, winner, loser, home_score, away_score, yards_leader, td_leader, pass_yds_leader, week_num, ticket_price) VALUES (67,'PHI', 'CAR', 'Philadelphia Eagles', 'Carolina Panthers', 21, 18, 'Jack Stoll', 'Ian Thomas', 'Jalen Hurts', 5, 226);											
 INSERT INTO Game (game_id, home_team_abbr, away_team_abbr, winner, loser, home_score, away_score, yards_leader, td_leader, pass_yds_leader, week_num, ticket_price) VALUES (68,'GB', 'CIN', 'Green Bay Packers', 'Cincinnati Bengals', 25, 22, 'Samori Toure', 'Samaje Perine', 'Joe Burrow', 5, 301);											
 INSERT INTO Game (game_id, home_team_abbr, away_team_abbr, winner, loser, home_score, away_score, yards_leader, td_leader, pass_yds_leader, week_num, ticket_price) VALUES (69,'PIT', 'DEN', 'Pittsburgh Steelers', 'Denver Broncos', 27, 19, 'Albert Okwuegbunam', 'KJ Hamler', 'Russell Wilson', 5, 279);											
