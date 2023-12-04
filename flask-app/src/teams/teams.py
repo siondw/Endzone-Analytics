@@ -9,7 +9,7 @@ teams = Blueprint('teams', __name__)
 @teams.route('/teams', methods=['GET'])
 def get_teams():
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT team_abbr, name, division, conference,salary_cap,third_conv_rate,redzone_eff,avg_ticket_price,wins,losses,win_pct FROM NFLTeams')
+    cursor.execute('SELECT * FROM NFLTeams')
 
     row_headers = [x[0] for x in cursor.description]
     json_data = []
