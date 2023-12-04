@@ -22,12 +22,12 @@ CREATE TABLE NFLTeams(
     division VARCHAR(50),
     conference VARCHAR(50),
     salary_cap INT,
-    third_conv_rate DOUBLE,
-    redzone_eff DOUBLE,
-    avg_ticket_price DOUBLE,
+    third_conv_rate float,
+    redzone_eff float,
+    avg_ticket_price float,
     wins INT,
     losses INT,
-    win_pct DOUBLE GENERATED ALWAYS AS (wins / (wins + losses)) STORED
+    win_pct float GENERATED ALWAYS AS (wins / (wins + losses)) STORED
 );
 
 CREATE TABLE Team_Picks (
@@ -98,7 +98,7 @@ CREATE TABLE Players(
    team_abbr varchar(3) NOT NULL,
    INDEX (team_abbr),
    position varchar (4),
-   qbr double,
+   qbr float,
    pass_yards_total int,
    rush_yards_total int,
    rec_yards_total int,
@@ -106,13 +106,13 @@ CREATE TABLE Players(
    pass_tds_total int,
    rec_tds_total int,
    games_played int,
-   total_tds_line varchar(50),
+   total_tds_line float,
    total_tds_odds varchar(50),
    school varchar (50),
-   total_yds_line varchar(50),
+   total_yds_line float,
    total_yds_odds varchar(50),
-   shuttle_time double,
-   forty_time double,
+   shuttle_time float,
+   forty_time float,
    bench_presses int,
    CONSTRAINT FOREIGN KEY (team_abbr) REFERENCES NFLTeams(team_abbr) ON DELETE RESTRICT ON UPDATE CASCADE
 );
