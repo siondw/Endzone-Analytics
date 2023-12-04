@@ -24,10 +24,10 @@ CREATE TABLE NFLTeams(
     salary_cap INT,
     third_conv_rate float,
     redzone_eff float,
-    avg_ticket_price float,
+    avg_ticket_price INT,
     wins INT,
     losses INT,
-    win_pct float GENERATED ALWAYS AS (wins / (wins + losses)) STORED
+   win_pct float GENERATED ALWAYS AS (wins / (wins + losses)) STORED
 );
 
 CREATE TABLE Team_Picks (
