@@ -94,7 +94,7 @@ CREATE TABLE Play_by_Play(
 
 CREATE TABLE Players(
    player_id int PRIMARY KEY AUTO_INCREMENT,
-   team_name varchar(50),
+   player_name varchar(50),
    team_abbr varchar(3) NOT NULL,
    INDEX (team_abbr),
    position varchar (4),
@@ -182,7 +182,7 @@ INSERT INTO NFLTeams (team_abbr, team_name, division, conference, salary_cap, th
 ('WAS', 'Washington Commanders', 'NFC East', 'NFC', 20226615, 0.37, 0.46, 82, 7, 10);
 
 
-INSERT INTO Players (player_id, team_name, team_abbr, position, qbr, pass_yards_total, rush_yards_total, rec_yards_total, rush_tds_total, pass_tds_total, rec_tds_total, games_played, total_tds_line, total_tds_odds, school, total_yds_line, total_yds_odds, shuttle_time, forty_time, bench_presses) VALUES 
+INSERT INTO Players (player_id, player_name, team_abbr, position, qbr, pass_yards_total, rush_yards_total, rec_yards_total, rush_tds_total, pass_tds_total, rec_tds_total, games_played, total_tds_line, total_tds_odds, school, total_yds_line, total_yds_odds, shuttle_time, forty_time, bench_presses) VALUES 
 (1, 'James Conner', 'AZ', 'RB', 0, 0, 782, 300, 7, 0, 1, 13, 5.5, '-119', 'Pitt', 480.5, '+180', 6.5, 4.9,21),
 (2, 'Eno Benjamin', 'AZ', 'RB', 0, 0, 299, 184, 2, 0, 0, 10, 2.5, '+147', 'East Carolina', 498.5, '-102', 7.13, 4.24,14),
 (3, 'Kyler Murray', 'AZ', 'QB', 53.6, 0, 418, 0, 3, 14, 0, 11, 2.5, '-145', 'BYU', 855.5, '+249', 6.85, 4.52,17),
