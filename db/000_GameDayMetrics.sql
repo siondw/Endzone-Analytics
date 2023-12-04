@@ -18,7 +18,7 @@ CREATE DATABASE GameDayMetrics;
 USE GameDayMetrics;
 CREATE TABLE NFLTeams(
     team_abbr VARCHAR(3) PRIMARY KEY,
-    name VARCHAR(50),
+    team_name VARCHAR(50),
     division VARCHAR(50),
     conference VARCHAR(50),
     salary_cap INT,
@@ -94,7 +94,7 @@ CREATE TABLE Play_by_Play(
 
 CREATE TABLE Players(
    player_id int PRIMARY KEY AUTO_INCREMENT,
-   name varchar(50),
+   team_name varchar(50),
    team_abbr varchar(3) NOT NULL,
    INDEX (team_abbr),
    position varchar (4),
@@ -147,7 +147,7 @@ CREATE TABLE Player_Game_Stats(
 );
 
 --TEAMS
-INSERT INTO NFLTeams (team_abbr, name, division, conference, salary_cap, third_conv_rate, redzone_eff, avg_ticket_price, wins, losses) VALUES 
+INSERT INTO NFLTeams (team_abbr, team_name, division, conference, salary_cap, third_conv_rate, redzone_eff, avg_ticket_price, wins, losses) VALUES 
 ('AZ', 'Arizona Cardinals', 'NFC West', 'NFC', 7863982, 0.46, 0.51, 94, 5, 12),
 ('ATL', 'Atlanta Falcons', 'NFC South', 'NFC', 39410705, 0.34, 0.64, 112, 4, 13),
 ('BAL', 'Baltimore Ravens', 'AFC North', 'AFC', 26727883, 0.34, 0.59, 95, 11, 6),
@@ -182,7 +182,7 @@ INSERT INTO NFLTeams (team_abbr, name, division, conference, salary_cap, third_c
 ('WAS', 'Washington Commanders', 'NFC East', 'NFC', 20226615, 0.37, 0.46, 82, 7, 10);
 
 --PLAYER
-INSERT INTO Players (player_id, name, team_abbr, position, qbr, pass_yards_total, rush_yards_total, rec_yards_total, rush_tds_total, pass_tds_total, rec_tds_total, games_played, total_tds_line, total_tds_odds, school, total_yds_line, total_yds_odds, shuttle_time, forty_time, bench_presses) VALUES 
+INSERT INTO Players (player_id, team_name, team_abbr, position, qbr, pass_yards_total, rush_yards_total, rec_yards_total, rush_tds_total, pass_tds_total, rec_tds_total, games_played, total_tds_line, total_tds_odds, school, total_yds_line, total_yds_odds, shuttle_time, forty_time, bench_presses) VALUES 
 (1, 'James Conner', 'AZ', 'RB', 0, 0, 782, 300, 7, 0, 1, 13, 5.5, '-119', 'Pitt', 480.5, '+180', 6.5, 4.9,21),
 (2, 'Eno Benjamin', 'AZ', 'RB', 0, 0, 299, 184, 2, 0, 0, 10, 2.5, '+147', 'East Carolina', 498.5, '-102', 7.13, 4.24,14),
 (3, 'Kyler Murray', 'AZ', 'QB', 53.6, 0, 418, 0, 3, 14, 0, 11, 2.5, '-145', 'BYU', 855.5, '+249', 6.85, 4.52,17),
@@ -1232,7 +1232,74 @@ INSERT INTO Team_Picks (team_abbr, pick_num, year) VALUES ('PHI',224,2024);
 
 --GAME
 INSERT INTO Game (game_id, home_team_abbr, away_team_abbr, winner, loser, home_score, away_score, yards_leader, td_leader, pass_yds_leader, week_num, ticket_price) VALUES
- (66,'ATL', 'NYJ', 'Atlanta Falcons', 'New York Jets', 27, 20, 'Bryan Edwards', 'Anthony Firkser', 'Marcus Mariota', 5, 321);											
+(2,'PHI', 'ATL', 'Philadelphia Eagles', 'Atlanta Falcons', 32, 6, 'DeVonta Smith', 'A.J. Brown', 'Jalen Hurts', 1, 287);
+
+INSERT INTO Game (game_id, home_team_abbr, away_team_abbr, winner, loser, home_score, away_score, yards_leader, td_leader, pass_yds_leader, week_num, ticket_price) VALUES
+(1,'TB', 'DAL', 'Tampa Bay Buccaneers', 'Dallas Cowboys', 31, 29, 'Dennis Houston', 'Rachaad White', 'Tom Brady', 1, 217),
+(3,'PIT', 'BUF', 'Pittsburgh Steelers', 'Buffalo Bills', 23, 16, 'Duke Johnson', 'Devin Singletary', 'Josh Allen', 1, 238),
+(4,'CAR', 'NYJ', 'Carolina Panthers', 'New York Jets', 19, 14, 'Elijah Moore', 'Spencer Brown', 'Baker Mayfield', 1, 186),
+(5,'CIN', 'MIN', 'Cincinnati Bengals', 'Minnesota Vikings', 27, 24, 'Trayveon Williams', 'Jalen Reagor', 'Kirk Cousins', 1, 287),
+(6,'SEA', 'IND', 'Seattle Seahawks', 'Indianapolis Colts', 28, 16, 'Mike Strachan', 'Laquon Treadwell', 'Geno Smith', 1, 207),
+(7,'AZ', 'TEN', 'Arizona Cardinals', 'Tennessee Titans', 38, 13, 'Marquise Brown', 'Rondale Moore', 'Ryan Tannehill', 1, 121),
+(8,'SF', 'DET', 'San Francisco 49ers', 'Detroit Lions', 41, 33, 'Josh Reynolds', 'DAndre Swift', 'Jared Goff', 1, 171),
+(9,'HOU', 'JAC', 'Houston Texans', 'Jacksonville Jaguars', 37, 21, 'O.J. Howard', 'Pharaoh Brown', 'Trevor Lawrence', 1, 331),
+(10,'LAC', 'WAS', 'Los Angeles Chargers', 'Washington Football Team', 20, 16, 'Cole Turner', 'Dax Milne', 'Justin Herbert', 1, 337),
+(11,'KC', 'CLE', 'Kansas City Chiefs', 'Cleveland Browns', 33, 29, 'Blake Bell', 'David Njoku', 'Patrick Mahomes', 1, 213),
+(12,'DEN', 'NYG', 'Denver Broncos', 'New York Giants', 27, 13, 'Eric Saubert', 'Courtland Sutton', 'Russell Wilson', 1, 203),
+(13,'NO', 'GB', 'New Orleans Saints', 'Green Bay Packers', 38, 3, 'Josiah Deguara', 'AJ Dillon', 'Aaron Rodgers', 1, 256),
+(14,'MIA', 'NE', 'Miami Dolphins', 'New England Patriots', 17, 16, 'Damien Harris', 'Tyquan Thornton', 'Tua Tagovailoa', 1, 259),
+(15,'LAR', 'CHI', 'Los Angeles Rams', 'Chicago Bears', 34, 14, 'Brandon Powell', 'Darrynton Evans', 'Justin Fields', 1, 329),
+(16,'LV', 'BAL', 'Las Vegas Raiders', 'Baltimore Ravens', 33, 27, 'Foster Moreau', 'Davante Adams', 'Derek Carr', 1, 285),
+(17,'WAS', 'NYG', 'Washington Football Team', 'New York Giants', 30, 29, 'Cam Sims', 'Marcus Johnson', 'Daniel Jones', 2, 144),
+(18,'BUF', 'MIA', 'Buffalo Bills', 'Miami Dolphins', 35, 0, 'Jake Kumerow', 'Khalil Shakir', 'Josh Allen', 2, 249),
+(19,'CAR', 'NO', 'Carolina Panthers', 'New Orleans Saints', 26, 7, 'Stephen Sullivan', 'Terrace Marshall Jr.', 'Andy Dalton', 2, 163),
+(20,'CHI', 'CIN', 'Chicago Bears', 'Cincinnati Bengals', 20, 17, 'Equanimeous St. Brown', 'Trayveon Williams', 'Joe Burrow', 2, 302),
+(21,'CLE', 'HOU', 'Cleveland Browns', 'Houston Texans', 31, 21, 'Dameon Pierce', 'Daylen Baldwin', 'Davis Mills', 2, 219),
+(22,'LAR', 'IND', 'Los Angeles Rams', 'Indianapolis Colts', 27, 24, 'Cooper Kupp', 'Jordan Wilkins', 'Matt Ryan', 2, 157),
+(23,'DEN', 'JAC', 'Denver Broncos', 'Jacksonville Jaguars', 23, 13, 'Tyler Badie', 'Courtland Sutton', 'Trevor Lawrence', 2, 159),
+(24,'NE', 'NYJ', 'New England Patriots', 'New York Jets', 25, 6, 'Garrett Wilson', 'Kendrick Bourne', 'Mac Jones', 2, 270),
+(25,'SF', 'PHI', 'San Francisco 49ers', 'Philadelphia Eagles', 17, 11, 'Jack Stoll', 'Quez Watkins', 'Jalen Hurts', 2, 300),
+(26,'LV', 'PIT', 'Las Vegas Raiders', 'Pittsburgh Steelers', 26, 17, 'Gunner Olszewski', 'Hunter Renfrow', 'Derek Carr', 2, 271),
+(27,'TB', 'ATL', 'Tampa Bay Buccaneers', 'Atlanta Falcons', 48, 25, 'Bryan Edwards', 'Ko Kieft', 'Tom Brady', 2, 201),
+(28,'AZ', 'MIN', 'Arizona Cardinals', 'Minnesota Vikings', 34, 33, 'Dalvin Cook', 'Corey Clement', 'Kirk Cousins', 2, 232),
+(29,'DAL', 'LAC', 'Dallas Cowboys', 'Los Angeles Chargers', 20, 17, 'CeeDee Lamb', 'Tony Pollard', 'Justin Herbert', 2, 147),
+(30,'TEN', 'SEA', 'Tennessee Titans', 'Seattle Seahawks', 33, 30, 'Jonathan Ward', 'Mason Kinsey', 'Geno Smith', 2, 331),
+(31,'BAL', 'KC', 'Baltimore Ravens', 'Kansas City Chiefs', 36, 35, 'Jerick McKinnon', 'Ronald Jones II', 'Patrick Mahomes', 2, 255),
+(32,'GB', 'DET', 'Green Bay Packers', 'Detroit Lions', 35, 17, 'Kylin Hill', 'James Mitchell', 'Jared Goff', 2, 216),
+(33,'CAR', 'HOU', 'Carolina Panthers', 'Houston Texans', 24, 9, 'Eno Benjamin', 'Terrace Marshall Jr.', 'Davis Mills', 3, 137),
+(34,'ATL', 'NYG', 'Atlanta Falcons', 'New York Giants', 17, 14, 'Gary Brightwell', 'Tanner Hudson', 'Daniel Jones', 3, 237),
+(35,'BUF', 'WAS', 'Buffalo Bills', 'Washington Football Team', 43, 21, 'Jamison Crowder', 'John Brown', 'Josh Allen', 3, 317),
+(36,'CLE', 'CHI', 'Cleveland Browns', 'Chicago Bears', 26, 6, 'Jerome Ford', 'Trestan Ebner', 'Jacoby Brissett', 3, 265),
+(37,'CIN', 'PIT', 'Cincinnati Bengals', 'Pittsburgh Steelers', 24, 10, 'Gunner Olszewski', 'Trent Taylor', 'Joe Burrow', 3, 252),
+(38,'TEN', 'IND', 'Tennessee Titans', 'Indianapolis Colts', 25, 16, 'Parris Campbell', 'Jordan Wilkins', 'Matt Ryan', 3, 258),
+(39,'AZ', 'JAC', 'Arizona Cardinals', 'Jacksonville Jaguars', 31, 19, 'Christian Kirk', 'Marvin Jones', 'Trevor Lawrence', 3, 270),
+(40,'BAL', 'DET', 'Baltimore Ravens', 'Detroit Lions', 19, 17, 'Tom Kennedy', 'Brock Wright', 'Jared Goff', 3, 334),
+(41,'LAC', 'KC', 'Los Angeles Chargers', 'Kansas City Chiefs', 30, 24, 'Richard Rodgers', 'Sony Michel', 'Patrick Mahomes', 3, 104),
+(42,'NO', 'NE', 'New Orleans Saints', 'New England Patriots', 28, 13, 'Damien Harris', 'Mark Ingram', 'Mac Jones', 3, 303),
+(43,'DEN', 'NYJ', 'Denver Broncos', 'New York Jets', 26, 0, 'Garrett Wilson', 'Corey Davis', 'Russell Wilson', 3, 279),
+(44,'LV', 'MIA', 'Las Vegas Raiders', 'Miami Dolphins', 31, 28, 'Tanner Conner', 'Jaylen Waddle', 'Tua Tagovailoa', 3, 100),
+(45,'MIN', 'SEA', 'Minnesota Vikings', 'Seattle Seahawks', 30, 17, 'Travis Homer', 'Rashaad Penny', 'Kirk Cousins', 3, 346),
+(46,'LAR', 'TB', 'Los Angeles Rams', 'Tampa Bay Buccaneers', 34, 24, 'Allen Robinson', 'Jacob Harris', 'Tom Brady', 3, 226),
+(47,'GB', 'SF', 'Green Bay Packers', 'San Francisco 49ers', 30, 28, 'Samori Toure', 'Elijah Mitchell', 'Aaron Rodgers', 3, 111),
+(48,'DAL', 'PHI', 'Dallas Cowboys', 'Philadelphia Eagles', 41, 21, 'Grant Calcaterra', 'Simi Fehoko', 'Jalen Hurts', 3, 166),
+(49,'CIN', 'JAC', 'Cincinnati Bengals', 'Jacksonville Jaguars', 24, 21, 'Snoop Conner', 'Chris Manhertz', 'Joe Burrow', 4, 263),
+(50,'WAS', 'ATL', 'Washington Football Team', 'Atlanta Falcons', 34, 30, 'Cordarrelle Patterson', 'Brian Robinson Jr.', 'Marcus Mariota', 4, 293),
+(51,'BUF', 'HOU', 'Buffalo Bills', 'Houston Texans', 40, 0, 'Pharaoh Brown', 'Devin Singletary', 'Josh Allen', 4, 289),
+(52,'DAL', 'CAR', 'Dallas Cowboys', 'Carolina Panthers', 36, 28, 'Tommy Tremble', 'Christian McCaffrey', 'Dak Prescott', 4, 240),
+(53,'CHI', 'DET', 'Chicago Bears', 'Detroit Lions', 24, 14, 'Kalif Raymond', 'Ihmir Smith-Marsette', 'Jared Goff', 4, 267),
+(54,'CLE', 'MIN', 'Cleveland Browns', 'Minnesota Vikings', 14, 7, 'Daylen Baldwin', 'Michael Woods II', 'Kirk Cousins', 4, 218),
+(55,'IND', 'MIA', 'Indianapolis Colts', 'Miami Dolphins', 27, 17, 'Dezmon Patmon', 'Jordan Wilkins', 'Tua Tagovailoa', 4, 282),
+(56,'KC', 'PHI', 'Kansas City Chiefs', 'Philadelphia Eagles', 42, 30, 'Grant Calcaterra', 'Trey Sermon', 'Patrick Mahomes', 4, 244),
+(57,'NYG', 'NO', 'New York Giants', 'New Orleans Saints', 27, 21, 'Darius Slayton', 'Richie James', 'Daniel Jones', 4, 227),
+(58,'NYJ', 'TEN', 'New York Jets', 'Tennessee Titans', 27, 24, 'Hassan Haskins', 'Geoff Swaim', 'Ryan Tannehill', 4, 226),
+(59,'AZ', 'LAR', 'Arizona Cardinals', 'Los Angeles Rams', 37, 20, 'Darrell Henderson', 'TySon Williams', 'Baker Mayfield', 4, 227),
+(60,'SEA', 'SF', 'Seattle Seahawks', 'San Francisco 49ers', 28, 21, 'Ray-Ray McCloud', 'DeeJay Dallas', 'Geno Smith', 4, 283),
+(61,'BAL', 'DEN', 'Baltimore Ravens', 'Denver Broncos', 23, 7, 'Chase Edmonds', 'Kenyan Drake', 'Russell Wilson', 4, 235),
+(62,'GB', 'PIT', 'Green Bay Packers', 'Pittsburgh Steelers', 27, 17, 'Jaylen Warren', 'AJ Dillon', 'Aaron Rodgers', 4, 295),
+(63,'TB', 'NE', 'Tampa Bay Buccaneers', 'New England Patriots', 19, 17, 'Ty Montgomery', 'Cade Otton', 'Tom Brady', 4, 203),
+(64,'LAC', 'LV', 'Los Angeles Chargers', 'Las Vegas Raiders', 28, 14, 'Josh Jacobs', 'Isaiah Spiller', 'Justin Herbert', 4, 146),
+(65,'LAR', 'SEA', 'Los Angeles Rams', 'Seattle Seahawks', 26, 17, 'Dareke Young', 'Rashaad Penny', 'Geno Smith', 5, 165),
+(66,'ATL', 'NYJ', 'Atlanta Falcons', 'New York Jets', 27, 20, 'Bryan Edwards', 'Anthony Firkser', 'Marcus Mariota', 5, 321);											
 INSERT INTO Game (game_id, home_team_abbr, away_team_abbr, winner, loser, home_score, away_score, yards_leader, td_leader, pass_yds_leader, week_num, ticket_price) VALUES (67,'PHI', 'CAR', 'Philadelphia Eagles', 'Carolina Panthers', 21, 18, 'Jack Stoll', 'Ian Thomas', 'Jalen Hurts', 5, 226);											
 INSERT INTO Game (game_id, home_team_abbr, away_team_abbr, winner, loser, home_score, away_score, yards_leader, td_leader, pass_yds_leader, week_num, ticket_price) VALUES (68,'GB', 'CIN', 'Green Bay Packers', 'Cincinnati Bengals', 25, 22, 'Samori Toure', 'Samaje Perine', 'Joe Burrow', 5, 301);											
 INSERT INTO Game (game_id, home_team_abbr, away_team_abbr, winner, loser, home_score, away_score, yards_leader, td_leader, pass_yds_leader, week_num, ticket_price) VALUES (69,'PIT', 'DEN', 'Pittsburgh Steelers', 'Denver Broncos', 27, 19, 'Albert Okwuegbunam', 'KJ Hamler', 'Russell Wilson', 5, 279);											
@@ -1306,7 +1373,7 @@ INSERT INTO Game (game_id, home_team_abbr, away_team_abbr, winner, loser, home_s
 INSERT INTO Game (game_id, home_team_abbr, away_team_abbr, winner, loser, home_score, away_score, yards_leader, td_leader, pass_yds_leader, week_num, ticket_price) VALUES (137,'MIA', 'BAL', 'Miami Dolphins', 'Baltimore Ravens', 22, 10, 'Andy Isabella', 'Durham Smythe', 'Tua Tagovailoa', 10, 267);											
 INSERT INTO Game (game_id, home_team_abbr, away_team_abbr, winner, loser, home_score, away_score, yards_leader, td_leader, pass_yds_leader, week_num, ticket_price) VALUES (138,'DAL', 'ATL', 'Dallas Cowboys', 'Atlanta Falcons', 43, 3, 'Kyle Pitts', 'Damien Williams', 'Dak Prescott', 10, 296);											
 INSERT INTO Game (game_id, home_team_abbr, away_team_abbr, winner, loser, home_score, away_score, yards_leader, td_leader, pass_yds_leader, week_num, ticket_price) VALUES (139,'BUF', 'NYJ', 'Buffalo Bills', 'New York Jets', 45, 17, 'Stefon Diggs', 'Elijah Moore', 'Josh Allen', 10, 310);											
-INSERT INTO Game (game_id, home_team_abbr, away_team_abbr, winner, loser, home_score, away_score, yards_leader, td_leader, pass_yds_leader, week_num, ticket_price) VALUES (140,'DET', 'DET', 'Pittsburgh Steelers', 'Detroit Lions', 16, 16, 'Jameson Williams', 'Amon-Ra St. Brown', 'Jared Goff', 10, 337);											
+INSERT INTO Game (game_id, home_team_abbr, away_team_abbr, winner, loser, home_score, away_score, yards_leader, td_leader, pass_yds_leader, week_num, ticket_price) VALUES (140,'PIT', 'DET', 'Pittsburgh Steelers', 'Detroit Lions', 16, 16, 'Jameson Williams', 'Amon-Ra St. Brown', 'Jared Goff', 10, 337);											
 INSERT INTO Game (game_id, home_team_abbr, away_team_abbr, winner, loser, home_score, away_score, yards_leader, td_leader, pass_yds_leader, week_num, ticket_price) VALUES (141,'TEN', 'NO', 'Tennessee Titans', 'New Orleans Saints', 23, 21, 'Kyle Philips', 'Derrick Henry', 'Andy Dalton', 10, 201);											
 INSERT INTO Game (game_id, home_team_abbr, away_team_abbr, winner, loser, home_score, away_score, yards_leader, td_leader, pass_yds_leader, week_num, ticket_price) VALUES (142,'WAS', 'TB', 'Washington Football Team', 'Tampa Bay Buccaneers', 29, 19, 'Ko Kieft', 'Reggie Bonnafon', 'Tom Brady', 10, 324);											
 INSERT INTO Game (game_id, home_team_abbr, away_team_abbr, winner, loser, home_score, away_score, yards_leader, td_leader, pass_yds_leader, week_num, ticket_price) VALUES (143,'NE', 'CLE', 'New England Patriots', 'Cleveland Browns', 45, 7, 'Daylen Baldwin', 'David Bell', 'Mac Jones', 10, 233);											
@@ -1732,7 +1799,7 @@ INSERT INTO Team_Game (team_abbr, game_id) VALUES ('ATL',138);
 INSERT INTO Team_Game (team_abbr, game_id) VALUES ('DAL',138);
 INSERT INTO Team_Game (team_abbr, game_id) VALUES ('BUF',139);
 INSERT INTO Team_Game (team_abbr, game_id) VALUES ('NYJ',139);
-INSERT INTO Team_Game (team_abbr, game_id) VALUES ('DET',140);
+INSERT INTO Team_Game (team_abbr, game_id) VALUES ('PIT',140);
 INSERT INTO Team_Game (team_abbr, game_id) VALUES ('DET',140);
 INSERT INTO Team_Game (team_abbr, game_id) VALUES ('NO',141);
 INSERT INTO Team_Game (team_abbr, game_id) VALUES ('TEN',141);
@@ -2617,37 +2684,47 @@ INSERT INTO Player_Injuries (player_id, injury, duration) VALUES (569,'Torn ACL'
 
 --PLAYER GAME STATS
 INSERT INTO Player_Game_Stats (game_id, player_id, pass_tds, pass_yds, rush_tds, rush_yds, rec_tds, rec_yds) VALUES
-(1,577,0,0,0,0,1,58),
-(1,574,0,0,1,140,3,78),
-(1,165,0,0,1,113,3,82),
-(1,177,0,0,0,0,0,6),
-(1,168,0,0,0,0,0,57),
+(1,577,0,0,0,0,1,58);
+INSERT INTO Player_Game_Stats (game_id, player_id, pass_tds, pass_yds, rush_tds, rush_yds, rec_tds, rec_yds) VALUES
+(1,574,0,0,1,140,3,78);
+INSERT INTO Player_Game_Stats (game_id, player_id, pass_tds, pass_yds, rush_tds, rush_yds, rec_tds, rec_yds) VALUES
+(1,165,0,0,1,113,3,82);
+INSERT INTO Player_Game_Stats (game_id, player_id, pass_tds, pass_yds, rush_tds, rush_yds, rec_tds, rec_yds) VALUES
+(1,177,0,0,0,0,0,6);
+INSERT INTO Player_Game_Stats (game_id, player_id, pass_tds, pass_yds, rush_tds, rush_yds, rec_tds, rec_yds) VALUES
+(1,168,0,0,0,0,0,57);
+INSERT INTO Player_Game_Stats (game_id, player_id, pass_tds, pass_yds, rush_tds, rush_yds, rec_tds, rec_yds) VALUES
 (2,501,0,0,0,143,1,140),
 (2,505,0,0,0,0,1,4),
 (2,504,0,0,3,160,1,118),
 (2,28,0,0,2,171,0,142),
 (2,41,0,0,0,0,2,153),
-(2,31,0,0,0,0,3,82),
+(2,31,0,0,0,0,3,82);
+INSERT INTO Player_Game_Stats (game_id, player_id, pass_tds, pass_yds, rush_tds, rush_yds, rec_tds, rec_yds) VALUES
 (3,518,0,0,0,0,0,0),
 (3,515,0,0,1,63,0,5),
 (3,81,0,0,0,0,3,128),
 (3,76,0,0,0,0,3,89),
-(3,69,0,0,2,64,2,61),
+(3,69,0,0,2,64,2,61);
+INSERT INTO Player_Game_Stats (game_id, player_id, pass_tds, pass_yds, rush_tds, rush_yds, rec_tds, rec_yds) VALUES
 (4,93,0,0,0,0,1,167),
 (4,90,1,382,1,116,0,0),
 (4,100,0,0,0,0,2,96),
 (4,481,0,0,1,34,2,60),
-(4,494,0,0,0,0,3,4),
+(4,494,0,0,0,0,3,4);
+INSERT INTO Player_Game_Stats (game_id, player_id, pass_tds, pass_yds, rush_tds, rush_yds, rec_tds, rec_yds) VALUES
 (5,130,0,0,0,43,0,125),
 (5,140,0,0,0,0,3,181),
 (5,403,0,0,0,131,3,62),
 (5,413,0,0,0,0,1,111),
-(5,407,0,0,0,0,0,55),
+(5,407,0,0,0,0,0,55);
+INSERT INTO Player_Game_Stats (game_id, player_id, pass_tds, pass_yds, rush_tds, rush_yds, rec_tds, rec_yds) VALUES
 (6,565,0,0,0,0,3,76),
 (6,560,0,0,0,0,0,0),
 (6,273,0,448,0,3,0,0),
 (6,285,0,0,0,0,0,6),
-(7,14,0,0,0,0,0,57),
+(7,14,0,0,0,0,0,57);
+INSERT INTO Player_Game_Stats (game_id, player_id, pass_tds, pass_yds, rush_tds, rush_yds, rec_tds, rec_yds) VALUES
 (7,19,0,0,0,0,1,80),
 (7,4,0,0,2,126,1,5),
 (7,604,0,0,0,0,1,83),
@@ -2679,7 +2756,8 @@ INSERT INTO Player_Game_Stats (game_id, player_id, pass_tds, pass_yds, rush_tds,
 (13,451,0,0,0,0,3,110),
 (13,436,5,162,2,27,0,0),
 (13,229,0,0,2,100,3,100),
-(13,242,0,0,0,0,2,83),
+(13,242,0,0,0,0,2,83);
+INSERT INTO Player_Game_Stats (game_id, player_id, pass_tds, pass_yds, rush_tds, rush_yds, rec_tds, rec_yds) VALUES
 (13,232,0,0,0,0,2,157),
 (14,394,0,0,0,0,2,161),
 (14,389,3,293,0,97,0,0),
@@ -2727,7 +2805,8 @@ INSERT INTO Player_Game_Stats (game_id, player_id, pass_tds, pass_yds, rush_tds,
 (22,285,0,0,0,0,2,87),
 (22,276,0,0,0,137,0,199),
 (23,194,0,0,0,0,0,0),
-(23,199,0,0,0,0,2,94),
+(23,199,0,0,0,0,2,94);
+INSERT INTO Player_Game_Stats (game_id, player_id, pass_tds, pass_yds, rush_tds, rush_yds, rec_tds, rec_yds) VALUES
 (23,292,0,0,3,69,1,41),
 (23,296,0,0,0,0,1,83),
 (24,419,0,0,3,93,0,41),
@@ -2779,7 +2858,8 @@ INSERT INTO Player_Game_Stats (game_id, player_id, pass_tds, pass_yds, rush_tds,
 (33,249,4,176,1,73,0,0),
 (34,28,0,0,2,16,1,189),
 (34,41,0,0,0,0,2,76),
-(34,472,0,0,0,0,2,178),
+(34,472,0,0,0,0,2,178);
+INSERT INTO Player_Game_Stats (game_id, player_id, pass_tds, pass_yds, rush_tds, rush_yds, rec_tds, rec_yds) VALUES
 (34,467,0,0,0,0,3,94),
 (35,81,0,0,0,0,2,92),
 (35,76,0,0,0,0,1,158),
@@ -2838,7 +2918,8 @@ INSERT INTO Player_Game_Stats (game_id, player_id, pass_tds, pass_yds, rush_tds,
 (46,376,0,0,0,0,0,0),
 (46,373,0,0,0,0,1,182),
 (46,360,2,359,3,57,0,0),
-(46,577,0,0,0,0,0,163),
+(46,577,0,0,0,0,0,163);
+INSERT INTO Player_Game_Stats (game_id, player_id, pass_tds, pass_yds, rush_tds, rush_yds, rec_tds, rec_yds) VALUES
 (46,574,0,0,3,87,2,183),
 (47,229,0,0,3,115,2,154),
 (47,242,0,0,0,0,3,143),
@@ -2877,7 +2958,8 @@ INSERT INTO Player_Game_Stats (game_id, player_id, pass_tds, pass_yds, rush_tds,
 (53,208,2,195,1,193,0,0),
 (54,150,0,0,1,68,1,32),
 (54,147,5,88,3,28,0,0),
-(54,403,0,0,3,52,1,113),
+(54,403,0,0,3,52,1,113);
+INSERT INTO Player_Game_Stats (game_id, player_id, pass_tds, pass_yds, rush_tds, rush_yds, rec_tds, rec_yds) VALUES
 (54,413,0,0,0,0,0,54),
 (55,273,3,184,0,5,0,0),
 (55,285,0,0,0,0,2,163),
@@ -2932,7 +3014,8 @@ INSERT INTO Player_Game_Stats (game_id, player_id, pass_tds, pass_yds, rush_tds,
 (65,565,0,0,0,0,3,71),
 (65,560,0,0,0,0,0,0),
 (65,553,0,0,2,160,3,62),
-(66,28,0,0,2,10,2,126),
+(66,28,0,0,2,10,2,126);
+INSERT INTO Player_Game_Stats (game_id, player_id, pass_tds, pass_yds, rush_tds, rush_yds, rec_tds, rec_yds) VALUES
 (66,41,0,0,0,0,1,0),
 (66,31,0,0,0,0,3,126),
 (66,481,0,0,2,77,2,126),
@@ -2972,7 +3055,8 @@ INSERT INTO Player_Game_Stats (game_id, player_id, pass_tds, pass_yds, rush_tds,
 (73,574,0,0,0,57,1,180),
 (73,394,0,0,0,0,2,25),
 (73,389,0,247,3,196,0,0),
-(73,382,1,471,3,63,0,0),
+(73,382,1,471,3,63,0,0);
+INSERT INTO Player_Game_Stats (game_id, player_id, pass_tds, pass_yds, rush_tds, rush_yds, rec_tds, rec_yds) VALUES
 (74,446,0,0,0,0,3,10),
 (74,451,0,0,0,0,1,187),
 (74,613,0,0,1,71,0,163),
@@ -3009,7 +3093,8 @@ INSERT INTO Player_Game_Stats (game_id, player_id, pass_tds, pass_yds, rush_tds,
 (80,48,0,0,3,79,3,10),
 (80,273,1,407,0,167,0,0),
 (80,285,0,0,0,0,1,5),
-(80,276,0,0,3,133,1,92),
+(80,276,0,0,3,133,1,92);
+INSERT INTO Player_Game_Stats (game_id, player_id, pass_tds, pass_yds, rush_tds, rush_yds, rec_tds, rec_yds) VALUES
 (81,577,0,0,0,0,0,117),
 (81,574,0,0,2,77,1,30),
 (81,584,0,0,0,0,1,42),
