@@ -37,6 +37,7 @@ def create_app():
     # from src.products.products  import products
     from src.teams.teams  import teams
     from src.schedule.schedule import schedule
+    from src.players.players import players
 
 
     # Register the routes from each Blueprint with the app object
@@ -45,6 +46,8 @@ def create_app():
     # app.register_blueprint(products,    url_prefix='/p')
     app.register_blueprint(teams,    url_prefix='/t')
     app.register_blueprint(schedule,    url_prefix='/s')
+    app.register_blueprint(players,    url_prefix='/p')
+
 
 
     # Don't forget to return the app object
