@@ -146,6 +146,41 @@ CREATE TABLE Player_Game_Stats(
    CONSTRAINT FOREIGN KEY (game_id) REFERENCES Game(game_id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
+--TEAMS
+INSERT INTO NFLTeams (team_abbr, name, division, conference, salary_cap, third_conv_rate, redzone_eff, avg_ticket_price, wins, losses) VALUES 
+('AZ', 'Arizona Cardinals', 'NFC West', 'NFC', 7863982, 0.46, 0.51, 94, 5, 12),
+('ATL', 'Atlanta Falcons', 'NFC South', 'NFC', 39410705, 0.34, 0.64, 112, 4, 13),
+('BAL', 'Baltimore Ravens', 'AFC North', 'AFC', 26727883, 0.34, 0.59, 95, 11, 6),
+('BUF', 'Buffalo Bills', 'AFC East', 'AFC', 1759639, 0.46, 0.54, 123, 10, 7),
+('CAR', 'Carolina Panthers', 'NFC South', 'NFC', 28756204, 0.38, 0.44, 81, 5, 12),
+('CHI', 'Chicago Bears', 'NFC North', 'NFC', 10672710, 0.47, 0.53, 66, 8, 9),
+('CIN', 'Cincinnati Bengals', 'AFC North', 'AFC', 10392379, 0.42, 0.62, 121, 10, 7),
+('CLE', 'Cleveland Browns', 'AFC North', 'AFC', 15166744, 0.41, 0.54, 100, 7, 10),
+('DAL', 'Dallas Cowboys', 'NFC East', 'NFC', 15767186, 0.51, 0.53, 134, 12, 5),
+('DEN', 'Denver Broncos', 'AFC West', 'AFC', 26620196, 0.38, 0.62, 60, 7, 10),
+('DET', 'Detroit Lions', 'NFC North', 'NFC', 31155299, 0.36, 0.61, 120, 3, 14),
+('GB', 'Green Bay Packers', 'NFC North', 'NFC', 22354690, 0.52, 0.63, 136, 13, 4),
+('HOU', 'Houston Texans', 'AFC South', 'AFC', 24725939, 0.47, 0.53, 119, 4, 13),
+('IND', 'Indianapolis Colts', 'AFC South', 'AFC', 24060729, 0.4, 0.61, 89, 9, 8),
+('JAC', 'Jacksonville Jaguars', 'AFC South', 'AFC', 13932528, 0.46, 0.45, 129, 2, 15),
+('KC', 'Kansas City Chiefs', 'AFC West', 'AFC', 28888331, 0.52, 0.45, 98, 14, 3),
+('LV', 'Las Vegas Raiders', 'AFC West', 'AFC', 6143321, 0.41, 0.53, 100, 8, 9),
+('LAC', 'Los Angeles Chargers', 'AFC West', 'AFC', 15220613, 0.39, 0.52, 117, 9, 8),
+('LAR', 'Los Angeles Rams', 'NFC West', 'NFC', 23093842, 0.47, 0.66, 96, 12, 5),
+('MIA', 'Miami Dolphins', 'AFC East', 'AFC', 34998831, 0.37, 0.45, 74, 9, 8),
+('MIN', 'Minnesota Vikings', 'NFC North', 'NFC', 13680005, 0.44, 0.51, 138, 7, 10),
+('NE', 'New England Patriots', 'AFC East', 'AFC', 24577700, 0.41, 0.54, 73, 10, 7),
+('NO', 'New Orleans Saints', 'NFC South', 'NFC', 21294905, 0.46, 0.56, 72, 9, 8),
+('NYG', 'New York Giants', 'NFC East', 'NFC', 22459705, 0.52, 0.61, 64, 6, 11),
+('NYJ', 'New York Jets', 'AFC East', 'AFC', 11087158, 0.43, 0.57, 81, 2, 15),
+('PHI', 'Philadelphia Eagles', 'NFC East', 'NFC', 8709819, 0.4, 0.51, 71, 9, 8),
+('PIT', 'Pittsburgh Steelers', 'AFC North', 'AFC', 2147007, 0.53, 0.63, 130, 9, 8),
+('SF', 'San Francisco 49ers', 'NFC West', 'NFC', 13762192, 0.47, 0.48, 130, 6, 11),
+('SEA', 'Seattle Seahawks', 'NFC West', 'NFC', 39573185, 0.35, 0.49, 76, 12, 5),
+('TB', 'Tampa Bay Buccaneers', 'NFC South', 'NFC', 14431821, 0.38, 0.46, 117, 13, 4),
+('TEN', 'Tennessee Titans', 'AFC South', 'AFC', 30492076, 0.45, 0.53, 87, 12, 5),
+('WAS', 'Washington Commanders', 'NFC East', 'NFC', 20226615, 0.37, 0.46, 82, 7, 10);
+
 --PLAYER
 INSERT INTO Players (player_id, name, team_abbr, position, qbr, pass_yards_total, rush_yards_total, rec_yards_total, rush_tds_total, pass_tds_total, rec_tds_total, games_played, total_tds_line, total_tds_odds, school, total_yds_line, total_yds_odds, shuttle_time, forty_time, bench_presses) VALUES 
 (1, 'James Conner', 'AZ', 'RB', 0, 0, 782, 300, 7, 0, 1, 13, 5.5, '-119', 'Pitt', 480.5, '+180', 6.5, 4.9,21),
@@ -776,41 +811,6 @@ INSERT INTO Players (player_id, name, team_abbr, position, qbr, pass_yards_total
 (626, 'Cam Sims', 'WAS', 'WR', 0, 0, 0, 89, 0, 0, 0, 17, 3.5, '+173', 'UNLV', 693.5, '-141', 6.61, 4.49,17),
 (627, 'Dax Milne', 'WAS', 'WR', 0, 0, 0, 37, 0, 0, 1, 15, 5.5, '+126', 'UMass', 990.5, '+195', 6.51, 4.76,4),
 (628, 'Cole Turner', 'WAS', 'TE', 0, 0, 0, 23, 0, 0, 0, 10, 9.5, '-102', 'Akron', 637.5, '+100', 6.35, 4.27,14);
-
---TEAMS
-INSERT INTO NFLTeams (team_abbr, name, division, conference, salary_cap, third_conv_rate, redzone_eff, avg_ticket_price, wins, losses) VALUES 
-('AZ', 'Arizona Cardinals', 'NFC West', 'NFC', 7863982, 0.46, 0.51, 94, 5, 12),
-('ATL', 'Atlanta Falcons', 'NFC South', 'NFC', 39410705, 0.34, 0.64, 112, 4, 13),
-('BAL', 'Baltimore Ravens', 'AFC North', 'AFC', 26727883, 0.34, 0.59, 95, 11, 6),
-('BUF', 'Buffalo Bills', 'AFC East', 'AFC', 1759639, 0.46, 0.54, 123, 10, 7),
-('CAR', 'Carolina Panthers', 'NFC South', 'NFC', 28756204, 0.38, 0.44, 81, 5, 12),
-('CHI', 'Chicago Bears', 'NFC North', 'NFC', 10672710, 0.47, 0.53, 66, 8, 9),
-('CIN', 'Cincinnati Bengals', 'AFC North', 'AFC', 10392379, 0.42, 0.62, 121, 10, 7),
-('CLE', 'Cleveland Browns', 'AFC North', 'AFC', 15166744, 0.41, 0.54, 100, 7, 10),
-('DAL', 'Dallas Cowboys', 'NFC East', 'NFC', 15767186, 0.51, 0.53, 134, 12, 5),
-('DEN', 'Denver Broncos', 'AFC West', 'AFC', 26620196, 0.38, 0.62, 60, 7, 10),
-('DET', 'Detroit Lions', 'NFC North', 'NFC', 31155299, 0.36, 0.61, 120, 3, 14),
-('GB', 'Green Bay Packers', 'NFC North', 'NFC', 22354690, 0.52, 0.63, 136, 13, 4),
-('HOU', 'Houston Texans', 'AFC South', 'AFC', 24725939, 0.47, 0.53, 119, 4, 13),
-('IND', 'Indianapolis Colts', 'AFC South', 'AFC', 24060729, 0.4, 0.61, 89, 9, 8),
-('JAC', 'Jacksonville Jaguars', 'AFC South', 'AFC', 13932528, 0.46, 0.45, 129, 2, 15),
-('KC', 'Kansas City Chiefs', 'AFC West', 'AFC', 28888331, 0.52, 0.45, 98, 14, 3),
-('LV', 'Las Vegas Raiders', 'AFC West', 'AFC', 6143321, 0.41, 0.53, 100, 8, 9),
-('LAC', 'Los Angeles Chargers', 'AFC West', 'AFC', 15220613, 0.39, 0.52, 117, 9, 8),
-('LAR', 'Los Angeles Rams', 'NFC West', 'NFC', 23093842, 0.47, 0.66, 96, 12, 5),
-('MIA', 'Miami Dolphins', 'AFC East', 'AFC', 34998831, 0.37, 0.45, 74, 9, 8),
-('MIN', 'Minnesota Vikings', 'NFC North', 'NFC', 13680005, 0.44, 0.51, 138, 7, 10),
-('NE', 'New England Patriots', 'AFC East', 'AFC', 24577700, 0.41, 0.54, 73, 10, 7),
-('NO', 'New Orleans Saints', 'NFC South', 'NFC', 21294905, 0.46, 0.56, 72, 9, 8),
-('NYG', 'New York Giants', 'NFC East', 'NFC', 22459705, 0.52, 0.61, 64, 6, 11),
-('NYJ', 'New York Jets', 'AFC East', 'AFC', 11087158, 0.43, 0.57, 81, 2, 15),
-('PHI', 'Philadelphia Eagles', 'NFC East', 'NFC', 8709819, 0.4, 0.51, 71, 9, 8),
-('PIT', 'Pittsburgh Steelers', 'AFC North', 'AFC', 2147007, 0.53, 0.63, 130, 9, 8),
-('SF', 'San Francisco 49ers', 'NFC West', 'NFC', 13762192, 0.47, 0.48, 130, 6, 11),
-('SEA', 'Seattle Seahawks', 'NFC West', 'NFC', 39573185, 0.35, 0.49, 76, 12, 5),
-('TB', 'Tampa Bay Buccaneers', 'NFC South', 'NFC', 14431821, 0.38, 0.46, 117, 13, 4),
-('TEN', 'Tennessee Titans', 'AFC South', 'AFC', 30492076, 0.45, 0.53, 87, 12, 5),
-('WAS', 'Washington Commanders', 'NFC East', 'NFC', 20226615, 0.37, 0.46, 82, 7, 10);
 
 --TEAM PICKS
 INSERT INTO Team_Picks (team_abbr, pick_num, year) VALUES ('GB',1,2023);
