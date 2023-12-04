@@ -146,7 +146,7 @@ CREATE TABLE Player_Game_Stats(
    CONSTRAINT FOREIGN KEY (game_id) REFERENCES Game(game_id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
---TEAMS
+
 INSERT INTO NFLTeams (team_abbr, team_name, division, conference, salary_cap, third_conv_rate, redzone_eff, avg_ticket_price, wins, losses) VALUES 
 ('AZ', 'Arizona Cardinals', 'NFC West', 'NFC', 7863982, 0.46, 0.51, 94, 5, 12),
 ('ATL', 'Atlanta Falcons', 'NFC South', 'NFC', 39410705, 0.34, 0.64, 112, 4, 13),
@@ -181,7 +181,7 @@ INSERT INTO NFLTeams (team_abbr, team_name, division, conference, salary_cap, th
 ('TEN', 'Tennessee Titans', 'AFC South', 'AFC', 30492076, 0.45, 0.53, 87, 12, 5),
 ('WAS', 'Washington Commanders', 'NFC East', 'NFC', 20226615, 0.37, 0.46, 82, 7, 10);
 
---PLAYER
+
 INSERT INTO Players (player_id, team_name, team_abbr, position, qbr, pass_yards_total, rush_yards_total, rec_yards_total, rush_tds_total, pass_tds_total, rec_tds_total, games_played, total_tds_line, total_tds_odds, school, total_yds_line, total_yds_odds, shuttle_time, forty_time, bench_presses) VALUES 
 (1, 'James Conner', 'AZ', 'RB', 0, 0, 782, 300, 7, 0, 1, 13, 5.5, '-119', 'Pitt', 480.5, '+180', 6.5, 4.9,21),
 (2, 'Eno Benjamin', 'AZ', 'RB', 0, 0, 299, 184, 2, 0, 0, 10, 2.5, '+147', 'East Carolina', 498.5, '-102', 7.13, 4.24,14),
@@ -812,7 +812,7 @@ INSERT INTO Players (player_id, team_name, team_abbr, position, qbr, pass_yards_
 (627, 'Dax Milne', 'WAS', 'WR', 0, 0, 0, 37, 0, 0, 1, 15, 5.5, '+126', 'UMass', 990.5, '+195', 6.51, 4.76,4),
 (628, 'Cole Turner', 'WAS', 'TE', 0, 0, 0, 23, 0, 0, 0, 10, 9.5, '-102', 'Akron', 637.5, '+100', 6.35, 4.27,14);
 
---TEAM PICKS
+
 INSERT INTO Team_Picks (team_abbr, pick_num, year) VALUES ('GB',1,2023);
 INSERT INTO Team_Picks (team_abbr, pick_num, year) VALUES ('NO',2,2023);
 INSERT INTO Team_Picks (team_abbr, pick_num, year) VALUES ('DET',3,2023);
@@ -1230,7 +1230,7 @@ INSERT INTO Team_Picks (team_abbr, pick_num, year) VALUES ('SF',222,2024);
 INSERT INTO Team_Picks (team_abbr, pick_num, year) VALUES ('BAL',223,2024);
 INSERT INTO Team_Picks (team_abbr, pick_num, year) VALUES ('PHI',224,2024);
 
---GAME
+
 INSERT INTO Game (game_id, home_team_abbr, away_team_abbr, winner, loser, home_score, away_score, yards_leader, td_leader, pass_yds_leader, week_num, ticket_price) VALUES
 (2,'PHI', 'ATL', 'Philadelphia Eagles', 'Atlanta Falcons', 32, 6, 'DeVonta Smith', 'A.J. Brown', 'Jalen Hurts', 1, 287);
 
@@ -1520,7 +1520,7 @@ INSERT INTO Game (game_id, home_team_abbr, away_team_abbr, winner, loser, home_s
 INSERT INTO Game (game_id, home_team_abbr, away_team_abbr, winner, loser, home_score, away_score, yards_leader, td_leader, pass_yds_leader, week_num, ticket_price) VALUES (284,'LAR', 'SF', 'Los Angeles Rams', 'San Francisco 49ers', 20, 17, 'Kyren Williams', 'Cam Akers', 'Jimmy Garoppolo', 21, 340);											
 INSERT INTO Game (game_id, home_team_abbr, away_team_abbr, winner, loser, home_score, away_score, yards_leader, td_leader, pass_yds_leader, week_num, ticket_price) VALUES (285,'LAR', 'CIN', 'Los Angeles Rams', 'Cincinnati Bengals', 23, 20, 'Cam Akers', 'Jacob Harris', 'Joe Burrow', 22, 191);											
 
---TEAM GAME
+
 INSERT INTO Team_Game (team_abbr, game_id) VALUES ('DAL',1);
 INSERT INTO Team_Game (team_abbr, game_id) VALUES ('TB',1);
 INSERT INTO Team_Game (team_abbr, game_id) VALUES ('ATL',2);
@@ -2092,7 +2092,7 @@ INSERT INTO Team_Game (team_abbr, game_id) VALUES ('SF',284);
 INSERT INTO Team_Game (team_abbr, game_id) VALUES ('CIN',285);
 INSERT INTO Team_Game (team_abbr, game_id) VALUES ('LAR',285);
 
---GAME HIGHLIGHT
+
 INSERT INTO Game_Highlight (game_id, link, description) VALUES (1, 'http://indiatimes.com/id/sapien.xml', 'Highlights from Tampa Bay Buccaneers vs. Dallas Cowboys');																					
 INSERT INTO Game_Highlight (game_id, link, description) VALUES (2, 'https://auda.org.au/erat/eros/viverra/eget.js', 'Highlights from Philadelphia Eagles vs. Atlanta Falcons');																					
 INSERT INTO Game_Highlight (game_id, link, description) VALUES (3, 'https://digg.com/in.aspx', 'Highlights from Pittsburgh Steelers vs. Buffalo Bills');																					
@@ -2379,7 +2379,7 @@ INSERT INTO Game_Highlight (game_id, link, description) VALUES (283, 'http://peo
 INSERT INTO Game_Highlight (game_id, link, description) VALUES (284, 'http://tripod.com/velit/eu/est/congue/elementum/in.png', 'Highlights from Los Angeles Rams vs. San Francisco 49ers');																					
 INSERT INTO Game_Highlight (game_id, link, description) VALUES (285, 'http://intel.com/vel.jsp', 'Highlights from Los Angeles Rams vs. Cincinnati Bengals');																					
 
---PLAY BY PLAY
+
 INSERT INTO Play_by_Play (game_id, play_summary, time, quarter) VALUES (1,'CeeDee Lamb makes a catch for a gain of 78 yards','04:26',1);														
 INSERT INTO Play_by_Play (game_id, play_summary, time, quarter) VALUES (1,'Tom Brady scrambles for a gain of 38 yards','14:02',2);														
 INSERT INTO Play_by_Play (game_id, play_summary, time, quarter) VALUES (1,'Cade Otton makes a catch for a gain of 45 yards','13:33',3);														
@@ -2580,7 +2580,7 @@ INSERT INTO Play_by_Play (game_id, play_summary, time, quarter) VALUES (40,'Crai
 INSERT INTO Play_by_Play (game_id, play_summary, time, quarter) VALUES (40,'Quintez Cephus makes a catch for a gain of 89 yards','02:37',2);														
 INSERT INTO Play_by_Play (game_id, play_summary, time, quarter) VALUES (40,'Shane Zylstra makes a catch for a loss of 7 yards','02:43',2);		
 
---PLAYER INJURIES
+
 INSERT INTO Player_Injuries (player_id, injury, duration) VALUES (426,'Concussion','4 weeks');
 INSERT INTO Player_Injuries (player_id, injury, duration) VALUES (536,'Muscle Tear','2 weeks');
 INSERT INTO Player_Injuries (player_id, injury, duration) VALUES (537,'Hamstring Strain','2 weeks');
@@ -2682,7 +2682,7 @@ INSERT INTO Player_Injuries (player_id, injury, duration) VALUES (223,'Groin Str
 INSERT INTO Player_Injuries (player_id, injury, duration) VALUES (575,'Back Injury','out for season');
 INSERT INTO Player_Injuries (player_id, injury, duration) VALUES (569,'Torn ACL','4 weeks');
 
---PLAYER GAME STATS
+
 INSERT INTO Player_Game_Stats (game_id, player_id, pass_tds, pass_yds, rush_tds, rush_yds, rec_tds, rec_yds) VALUES
 (1,577,0,0,0,0,1,58);
 INSERT INTO Player_Game_Stats (game_id, player_id, pass_tds, pass_yds, rush_tds, rush_yds, rec_tds, rec_yds) VALUES
