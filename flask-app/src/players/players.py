@@ -97,6 +97,60 @@ def get_receiving_leaderboard():
     the_response.mimetype = 'application/json'
     return the_response
 
+# pass touchdown leaderboard
+@players.route('/players/pass_touchdown_leaders', methods=['GET'])
+def get_pass_touchdown_leaderboard():
+    query = f"SELECT player_name, pass_tds_total FROM Players ORDER BY pass_tds_total DESC LIMIT 10"
+    current_app.logger.info(query)
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+# receiving touchdown leaderboard
+@players.route('/players/receiving_touchdown_leaders', methods=['GET'])
+def get_receiving_touchdown_leaderboard():
+    query = f"SELECT player_name, rec_tds_total FROM Players ORDER BY rec_tds_total DESC LIMIT 10"
+    current_app.logger.info(query)
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+# rush touchdown leaderboard
+@players.route('/players/rush_touchdown_leaders', methods=['GET'])
+def get_rush_touchdown_leaderboard():
+    query = f"SELECT player_name, rush_tds_total FROM Players ORDER BY rush_tds_total DESC LIMIT 10"
+    current_app.logger.info(query)
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
 # player injuries in a game
 @players.route('/players/injuries', methods=['GET'])
 def get_player_injuries():
