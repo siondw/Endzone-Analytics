@@ -116,7 +116,7 @@ def update_pick():
     # Corrected SQL query using parameterized inputs
     the_query = """
     UPDATE Team_Picks 
-    SET team_abbr = '%s'
+    SET team_abbr = %s
     WHERE pick_id = %s;
     """
 
@@ -124,7 +124,7 @@ def update_pick():
 
     # Executing the query with parameters
     cursor = db.get_db().cursor()
-    cursor.execute(the_query, (team_id, pick_id))
+    cursor.execute(the_query, (team_abbr, pick_id))
     db.get_db().commit()
 
     return f"Successfully edited pick #{pick_id}!"
