@@ -25,7 +25,7 @@ def get_players(name):
 
 # show leader board
 @players.route('/players', methods=['GET'])
-def get_players(name):
+def get_leaderboard():
     query = f"SELECT player_name, pass_yards_total FROM Players ORDER BY pass_yards_total DESC LIMIT 5'"
     current_app.logger.info(query)
     cursor = db.get_db().cursor()
