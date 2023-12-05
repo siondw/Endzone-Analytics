@@ -37,7 +37,8 @@ def get_standings_AFC():
     the_response.mimetype = 'application/json'
     return the_response
 
-# Get all games from the DB for a specific team
+
+# Get all stats for a specific team
 @teams.route('/teams/<team_abbr>', methods=['GET'])
 def get_team_schedule(team_abbr):
 
@@ -60,9 +61,30 @@ def get_team_schedule(team_abbr):
 
 # Gets team name from an abbreviation
 @teams.route('/team_name/<team_abbr>', methods=['GET'])
-def get_team_schedule(team_abbr):
+def get_team_name(team_abbr):
 
     query = f"SELECT team_name FROM NFLTeams WHERE team_abbr = '{team_abbr}'"
+    current_app.logger.info(query)
+
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+
+# Gets all the picks
+@teams.route('/picks', methods=['GET'])
+def get_picks():
+
+    query = f"SELECT team_name, pick_num, year FROM NFLTeams NATURAL JOIN Team_picks"
     current_app.logger.info(query)
 
     cursor = db.get_db().cursor()
