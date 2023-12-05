@@ -115,7 +115,7 @@ def update_score():
 def delete_record(game_id):
     
     # Create a cursor to execute the delete query
-    cursor = db.get_db.cursor()
+    cursor = db.get_db().cursor()
     cursor.execute("DELETE FROM Game WHERE game_id = %s", (game_id,))
 
     db.get_db().commit()
