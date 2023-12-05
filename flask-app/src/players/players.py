@@ -5,6 +5,25 @@ from src import db
 
 players = Blueprint('players', __name__)
 
+# Get all player name
+@players.route('/players/all_names', methods=['GET'])
+def get_player_names():
+    query = f"SELECT player_name FROM Players ORDER BY player_name'"
+    current_app.logger.info(query)
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+
 # Get specific player from the DB
 @players.route('/players/<name>', methods=['GET'])
 def get_players(name):
