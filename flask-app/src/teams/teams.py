@@ -116,7 +116,7 @@ def update_pick():
     # Corrected SQL query using parameterized inputs
     the_query = """
     UPDATE Team_Picks 
-    SET team_abbr = %s
+    SET team_abbr = '%s'
     WHERE pick_id = %s;
     """
 
