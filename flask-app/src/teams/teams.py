@@ -84,7 +84,7 @@ def get_team_name(team_abbr):
 @teams.route('/picks', methods=['GET'])
 def get_picks():
 
-    query = f"SELECT team_name, pick_num, year FROM NFLTeams NATURAL JOIN Team_Picks"
+    query = f"SELECT team_name, pick_num, year, team_abbr FROM NFLTeams NATURAL JOIN Team_Picks"
     current_app.logger.info(query)
 
     cursor = db.get_db().cursor()
