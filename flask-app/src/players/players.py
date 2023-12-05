@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, make_response, current_app
+from flask import Blueprint, request, jsonify, make_response, current_app, urllib
 import json
 from src import db
 
@@ -27,7 +27,8 @@ def get_player_names():
 # Get specific player from the DB
 @players.route('/players/<name>', methods=['GET'])
 def get_players(name):
-    query = f"SELECT * FROM Players WHERE player_name = '{name}'"
+    decoded_name = urllib.parse.unquote(name)
+    query = f"SELECT * FROM Players WHERE player_name = '{decoded_name}'"
     current_app.logger.info(query)
     cursor = db.get_db().cursor()
     cursor.execute(query)
