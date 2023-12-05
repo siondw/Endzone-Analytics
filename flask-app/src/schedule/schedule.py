@@ -9,7 +9,7 @@ schedule = Blueprint('schedule', __name__)
 @schedule.route('/schedule', methods=['GET'])
 def get_schedule():
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT * FROM Team_Game')
+    cursor.execute('SELECT home_team_abbr, home_score, away_score, away_team_abbr, game_id FROM Game')
 
     row_headers = [x[0] for x in cursor.description]
     json_data = []
@@ -84,8 +84,8 @@ def get_week_schedule(weekstart, weekend):
     return the_response
 
 # Edit a specific game
-@schedule.route('/schedule/<team_abbr>', methods=['PUT'])
-def update_score(team_abbr):
+@schedule.route('/schedule', methods=['PUT'])
+def update_score():
     
     the_data = request.json
 
@@ -93,18 +93,6 @@ def update_score(team_abbr):
     home_score = the_data['home_score']
     away_score = the_data['away_score']
 
-    
-    # # grab order_id and previous drink price for the given drink
-    # drinkInfo = get_drink_info(drinkID)
-    
-    # orderID = str(drinkInfo['order_id'])
-    # prev_price = str(drinkInfo['price'])
-    
-    # # calculate price change (if any)
-    # price_change = float(price) - float(prev_price)
-    
-    # # update order total price
-    # order_query = 'UPDATE `Order` SET total_price = total_price + ' + str(price_change) + ' WHERE order_id = ' + str(orderID) + ';'
 
     current_app.logger.info(the_data)
 
