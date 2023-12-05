@@ -84,7 +84,7 @@ def get_team_name(team_abbr):
 @teams.route('/picks', methods=['GET'])
 def get_picks():
 
-    query = f"SELECT team_name, pick_num, year FROM NFLTeams NATURAL JOIN Team_picks"
+    query = f"SELECT team_name, pick_num, year FROM NFLTeams NATURAL JOIN Team_Picks"
     current_app.logger.info(query)
 
     cursor = db.get_db().cursor()
@@ -99,3 +99,44 @@ def get_picks():
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response
+
+
+# Edit a specific pick
+@teams.route('/picks', methods=['PUT'])
+def update_pick():
+    
+    the_data = request.json
+
+    team_abbr = the_data['team_abbr']
+    pick_id = the_data['pick_id']
+
+    current_app.logger.info(the_data)
+
+    # Corrected SQL query using parameterized inputs
+    the_query = """
+    UPDATE Team_Picks 
+    SET team_abbr = %s
+    WHERE pick_id = %s;
+    """
+
+    current_app.logger.info(the_query)
+
+    # Executing the query with parameters
+    cursor = db.get_db().cursor()
+    cursor.execute(the_query, (team_id, pick_id))
+    db.get_db().commit()
+
+    return f"Successfully edited pick #{pick_id}!"
+
+
+# delete a pick
+@teams.route('/picks/<int:pick_id>', methods=['DELETE'])
+def delete_pick(pick_id):
+    
+    # Create a cursor to execute the delete query
+    cursor = db.get_db().cursor()
+    cursor.execute("DELETE FROM Team_Picks WHERE pick_id = %s", (pick_id))
+
+    db.get_db().commit()
+
+    return f"Successfully deleted pick!"

@@ -111,6 +111,7 @@ def update_score():
 
     return f"Successfully edited game #{game_id}!"
 
+# delete a game from schedule
 @schedule.route('/schedule/<int:game_id>', methods=['DELETE'])
 def delete_record(game_id):
     
