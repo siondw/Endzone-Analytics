@@ -84,13 +84,14 @@ def get_week_schedule(weekstart, weekend):
     return the_response
 
 # Edit a specific game
-@schedule.route('/schedule/<game_id>', methods=['PUT'])
-def update_score(game_id):
+@schedule.route('/schedule', methods=['PUT'])
+def update_score():
     
     the_data = request.json
 
     home_score = the_data['home_score']
     away_score = the_data['away_score']
+    game_id = the_data['game_id']
 
     current_app.logger.info(the_data)
 
