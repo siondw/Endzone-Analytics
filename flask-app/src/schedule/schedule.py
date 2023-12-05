@@ -121,3 +121,49 @@ def delete_record(game_id):
     db.get_db().commit()
 
     return f"Successfully deleted game!"
+
+# add a new game
+@schedule.route('/schedule', methods=['POST'])
+def add_new_game():
+    
+    # collecting data from the request object 
+    the_data = request.json
+    current_app.logger.info(the_data)
+
+    #extracting the variable
+    home_team_abbr = the_data['home_team_abbr']
+    away_team_abbr = the_data['away_team_abbr']
+    winner = the_data['winner']
+    loser = the_data['loser']
+    home_score = the_data['home_score']
+    away_score = the_data['away_score']
+    yards_leader = the_data['yards_leader']
+    td_leader = the_data['td_leader']
+    pass_yds_leader = the_data['pass_yds_leader']
+    week_num = the_data['week_num']
+    ticket_price = the_data['ticket_price']
+
+
+
+
+    # Constructing the query
+    query = 'INSERT INTO Game (home_team_abbr, away_team_abbr, winner, loser, home_score, away_score, yards_leader, td_leader, pass_yds_leader, week_num, ticket_price) VALUES"'
+    query += home_team_abbr + '", "'
+    query += away_team_abbr + '", "'
+    query += winner + '", "'
+    query += loser + '", "'
+    query += str(home_score) + '", "'
+    query += str(away_score) + '", "'
+    query += yards_leader + '", "'
+    query += td_leader + '", "'
+    query += pass_yds_leader + '", "'
+    query += str(week_num) + '", "'
+    query += str(ticket_price) + ')'
+    current_app.logger.info(query)
+
+    # executing and committing the insert statement 
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
+    
+    return 'Success!'
