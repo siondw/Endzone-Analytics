@@ -96,3 +96,57 @@ def get_receiving_leaderboard():
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response
+
+# player injuries in a game
+@players.route('/players/injuries', methods=['GET'])
+def get_player_injuries():
+    query = f"SELECT name, injury, duration FROM Player_Injuries JOIN Players ON Player_Injuries.player_id = Players.player_id"
+    current_app.logger.info(query)
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+# TDs line for all players 
+@players.route('/players/total_tds_props', methods=['GET'])
+def get_total_tds_props():
+    query = f"SELECT total_tds_line FROM Players"
+    current_app.logger.info(query)
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+# yards line for all players
+@players.route('/players/total_yds_props', methods=['GET'])
+def get_total_yds_props():
+    query = f"SELECT total_yds_line FROM Players"
+    current_app.logger.info(query)
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
