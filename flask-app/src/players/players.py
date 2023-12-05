@@ -5,7 +5,7 @@ from src import db
 
 players = Blueprint('players', __name__)
 
-# Get all player name
+# Get all player names
 @players.route('/players/all_names', methods=['GET'])
 def get_player_names():
     query = f"SELECT player_name FROM Players ORDER BY player_name'"
@@ -42,7 +42,7 @@ def get_players(name):
     the_response.mimetype = 'application/json'
     return the_response
 
-# passing leader board
+# passing leaderboard
 @players.route('/players/passing_leaders', methods=['GET'])
 def get_passing_leaderboard():
     query = f"SELECT player_name, pass_yards_total FROM Players ORDER BY pass_yards_total DESC LIMIT 10'"
@@ -60,7 +60,7 @@ def get_passing_leaderboard():
     the_response.mimetype = 'application/json'
     return the_response
 
-# rushing leader board
+# rushing leaderboard
 @players.route('/players/rushing_leaders', methods=['GET'])
 def get_passing_leaderboard():
     query = f"SELECT player_name, rush_yards_total FROM Players ORDER BY rush_yards_total DESC LIMIT 10'"
@@ -78,7 +78,7 @@ def get_passing_leaderboard():
     the_response.mimetype = 'application/json'
     return the_response
 
-# receiving leader board
+# receiving leaderboard
 @players.route('/players/receiving_leaders', methods=['GET'])
 def get_passing_leaderboard():
     query = f"SELECT player_name, rec_yards_total FROM Players ORDER BY rec_yards_total DESC LIMIT 10'"
