@@ -97,8 +97,8 @@ def update_score():
     current_app.logger.info(the_data)
 
     the_query = 'UPDATE Game SET '
-    the_query += 'home_score = "' + home_score + '", '
-    the_query += 'away_score = "' + away_score + '", '
+    the_query += 'home_score = "' + str(home_score) + '", '
+    the_query += 'away_score = "' + str(away_score) + '", '
     the_query += 'WHERE game_id = {0};'.format(game_id)
 
     current_app.logger.info(the_query)
