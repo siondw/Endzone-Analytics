@@ -84,6 +84,7 @@ def get_week_schedule(weekstart, weekend):
     return the_response
 
 # Edit a specific game
+# Edit a specific game
 @schedule.route('/schedule', methods=['PUT'])
 def update_score():
     
@@ -93,19 +94,20 @@ def update_score():
     home_score = the_data['home_score']
     away_score = the_data['away_score']
 
-
     current_app.logger.info(the_data)
 
-    the_query = 'UPDATE Game SET '
-    the_query += 'home_score = "' + str(home_score) + '", '
-    the_query += 'away_score = "' + str(away_score) + '", '
-    the_query += 'WHERE game_id = {0};'.format(game_id)
+    # Corrected SQL query using parameterized inputs
+    the_query = """
+    UPDATE Game 
+    SET home_score = %s, away_score = %s 
+    WHERE game_id = %s;
+    """
 
     current_app.logger.info(the_query)
-    
+
+    # Executing the query with parameters
     cursor = db.get_db().cursor()
-    cursor.execute(the_query)
-    cursor.execute(order_query)
+    cursor.execute(the_query, (home_score, away_score, game_id))
     db.get_db().commit()
 
-    return "successfully edited game #{0}!".format(game_id)
+    return f"Successfully edited game #{game_id}!"
