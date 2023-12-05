@@ -6,7 +6,7 @@ from src import db
 teams = Blueprint('teams', __name__)
 
 # Get standings
-@teams.route('/teams', methods=['GET'])
+@teams.route('/standings', methods=['GET'])
 def get_standings():
     cursor = db.get_db().cursor()
     cursor.execute('SELECT team_name, SUM(wins), SUM(losses), `division` FROM NFLTeams GROUP BY `division`, `team_name` ORDER BY `division`, SUM(wins) DESC;')
