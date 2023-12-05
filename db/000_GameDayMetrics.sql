@@ -67,7 +67,7 @@ CREATE TABLE Team_Game(
    game_id int,
    PRIMARY KEY (team_abbr, game_id),
    CONSTRAINT FOREIGN KEY (team_abbr) REFERENCES NFLTeams(team_abbr) ON DELETE RESTRICT ON UPDATE CASCADE,
-   CONSTRAINT FOREIGN KEY (game_id) REFERENCES Game(game_id) ON DELETE RESTRICT ON UPDATE CASCADE
+   CONSTRAINT FOREIGN KEY (game_id) REFERENCES Game(game_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 
@@ -76,7 +76,7 @@ CREATE TABLE Game_Highlight(
    link varchar(200),
    description varchar(150),
    PRIMARY KEY (game_id, link),
-   CONSTRAINT FOREIGN KEY (game_id) REFERENCES Game(game_id) ON DELETE RESTRICT ON UPDATE CASCADE
+   CONSTRAINT FOREIGN KEY (game_id) REFERENCES Game(game_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 
@@ -88,7 +88,7 @@ CREATE TABLE Play_by_Play(
    time varchar(10),
    quarter int,
    PRIMARY KEY (game_id, play_id),
-   CONSTRAINT FOREIGN KEY (game_id) REFERENCES Game(game_id) ON DELETE RESTRICT ON UPDATE CASCADE
+   CONSTRAINT FOREIGN KEY (game_id) REFERENCES Game(game_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 
@@ -143,7 +143,7 @@ CREATE TABLE Player_Game_Stats(
    rec_yds int,
    PRIMARY KEY (stat_id, game_id, player_id),
    CONSTRAINT FOREIGN KEY (player_id) REFERENCES Players(player_id) ON DELETE RESTRICT ON UPDATE CASCADE,
-   CONSTRAINT FOREIGN KEY (game_id) REFERENCES Game(game_id) ON DELETE RESTRICT ON UPDATE CASCADE
+   CONSTRAINT FOREIGN KEY (game_id) REFERENCES Game(game_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 

@@ -84,7 +84,6 @@ def get_week_schedule(weekstart, weekend):
     return the_response
 
 # Edit a specific game
-# Edit a specific game
 @schedule.route('/schedule', methods=['PUT'])
 def update_score():
     
