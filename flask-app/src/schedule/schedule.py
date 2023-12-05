@@ -82,3 +82,42 @@ def get_week_schedule(weekstart, weekend):
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response
+
+# Edit a specific game
+@schedule.route('/schedule/<team_abbr>', methods=['PUT'])
+def update_score(team_abbr):
+    
+    the_data = request.json
+
+    game_id = the_data['game_id']
+    home_score = the_data['home_score']
+    away_score = the_data['away_score']
+
+    
+    # # grab order_id and previous drink price for the given drink
+    # drinkInfo = get_drink_info(drinkID)
+    
+    # orderID = str(drinkInfo['order_id'])
+    # prev_price = str(drinkInfo['price'])
+    
+    # # calculate price change (if any)
+    # price_change = float(price) - float(prev_price)
+    
+    # # update order total price
+    # order_query = 'UPDATE `Order` SET total_price = total_price + ' + str(price_change) + ' WHERE order_id = ' + str(orderID) + ';'
+
+    current_app.logger.info(the_data)
+
+    the_query = 'UPDATE Game SET '
+    the_query += 'home_score = "' + home_score + '", '
+    the_query += 'away_score = "' + away_score + '", '
+    the_query += 'WHERE game_id = {0};'.format(game_id)
+
+    current_app.logger.info(the_query)
+    
+    cursor = db.get_db().cursor()
+    cursor.execute(the_query)
+    cursor.execute(order_query)
+    db.get_db().commit()
+
+    return "successfully edited game #{0}!".format(game_id)
