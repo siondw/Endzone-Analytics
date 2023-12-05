@@ -156,12 +156,13 @@ def add_new_pick():
     pick_num = the_data['pick_num']
     year = the_data['year']
 
-   # Constructing the query with manual quotes for string fields
+    # Constructing the query with manual quotes for string fields and without quotes for integers
     query = 'INSERT INTO Team_Picks (team_abbr, pick_num, year) VALUES ('
-    query += "'" + team_abbr + "', '"
-    query += str(pick_num) + "', '"
-    query += str(year) + ')'
+    query += "'" + team_abbr + "', "  # String value, so it's wrapped in quotes
+    query += str(pick_num) + ", "     # Integer value, no quotes needed
+    query += str(year) + ')'          # Integer value, no quotes needed
     current_app.logger.info(query)
+
 
     # Executing and committing the insert statement 
     cursor = db.get_db().cursor()
