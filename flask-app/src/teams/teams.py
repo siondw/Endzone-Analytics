@@ -140,3 +140,31 @@ def delete_pick(pick_id):
     db.get_db().commit()
 
     return f"Successfully deleted pick!"
+
+
+# add a new pick
+@teams.route('/picks', methods=['POST'])
+def add_new_pick():
+    
+    # collecting data from the request object 
+    the_data = request.json
+    current_app.logger.info(the_data)
+
+    #extracting the variable
+    team_abbr = the_data['team_abbr']
+    pick_num = the_data['pick_num']
+    year = the_data['year']
+
+   # Constructing the query with manual quotes for string fields
+    query = 'INSERT INTO Team_Picks (team_abbr, pick_num, year) VALUES ('
+    query += "'" + team_abbr + "', '"
+    query += str(pick_num) + "', '"
+    query += str(year) + ')'
+    current_app.logger.info(query)
+
+    # Executing and committing the insert statement 
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
+
+    return 'Success!'
