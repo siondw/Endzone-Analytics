@@ -146,24 +146,24 @@ def add_new_game():
 
 
 
-    # Constructing the query
-    query = 'INSERT INTO Game (home_team_abbr, away_team_abbr, winner, loser, home_score, away_score, yards_leader, td_leader, pass_yds_leader, week_num, ticket_price) VALUES"'
-    query += home_team_abbr + '", "'
-    query += away_team_abbr + '", "'
-    query += winner + '", "'
-    query += loser + '", "'
-    query += str(home_score) + '", "'
-    query += str(away_score) + '", "'
-    query += yards_leader + '", "'
-    query += td_leader + '", "'
-    query += pass_yds_leader + '", "'
-    query += str(week_num) + '", "'
+   # Constructing the query with manual quotes for string fields
+    query = 'INSERT INTO Game (home_team_abbr, away_team_abbr, winner, loser, home_score, away_score, yards_leader, td_leader, pass_yds_leader, week_num, ticket_price) VALUES ('
+    query += "'" + home_team_abbr + "', '"
+    query += away_team_abbr + "', '"
+    query += winner + "', '"
+    query += loser + "', "
+    query += str(home_score) + ", "
+    query += str(away_score) + ", '"
+    query += yards_leader + "', '"
+    query += td_leader + "', '"
+    query += pass_yds_leader + "', "
+    query += str(week_num) + ", "
     query += str(ticket_price) + ')'
     current_app.logger.info(query)
 
-    # executing and committing the insert statement 
+    # Executing and committing the insert statement 
     cursor = db.get_db().cursor()
     cursor.execute(query)
     db.get_db().commit()
-    
+
     return 'Success!'
