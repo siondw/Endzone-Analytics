@@ -62,7 +62,7 @@ def get_passing_leaderboard():
 
 # rushing leaderboard
 @players.route('/players/rushing_leaders', methods=['GET'])
-def get_passing_leaderboard():
+def get_rushing_leaderboard():
     query = f"SELECT player_name, rush_yards_total FROM Players ORDER BY rush_yards_total DESC LIMIT 10'"
     current_app.logger.info(query)
     cursor = db.get_db().cursor()
@@ -80,7 +80,7 @@ def get_passing_leaderboard():
 
 # receiving leaderboard
 @players.route('/players/receiving_leaders', methods=['GET'])
-def get_passing_leaderboard():
+def get_receiving_leaderboard():
     query = f"SELECT player_name, rec_yards_total FROM Players ORDER BY rec_yards_total DESC LIMIT 10'"
     current_app.logger.info(query)
     cursor = db.get_db().cursor()
