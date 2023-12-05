@@ -6,7 +6,7 @@ from src import db
 players = Blueprint('players', __name__)
 
 # Get specific player from the DB
-@players.route('/players', methods=['GET'])
+@players.route('/players/<name>', methods=['GET'])
 def get_players(name):
     query = f"SELECT * FROM Players WHERE player_name = '{name}'"
     current_app.logger.info(query)
