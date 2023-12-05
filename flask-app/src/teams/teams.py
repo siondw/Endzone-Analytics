@@ -102,13 +102,12 @@ def get_picks():
 
 
 # Edit a specific pick
-@teams.route('/picks', methods=['PUT'])
-def update_pick():
+@teams.route('/picks/<pick_id>', methods=['PUT'])
+def update_pick(pick_id):
     
     the_data = request.json
 
     team_abbr = the_data['team_abbr']
-    pick_id = the_data['pick_id']
 
     current_app.logger.info(the_data)
 
