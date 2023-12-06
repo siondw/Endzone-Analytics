@@ -226,7 +226,7 @@ def get_total_yds_props(player_id):
 # player game stats
 @players.route('/players/game_stats/<player_id>', methods=['GET'])
 def get_game_stats(player_id):
-    query = f"SELECT * FROM Player_Game_Stats PGS JOIN Game G ON PGS.game_id = G.game_id WHERE P.player_id = '{player_id}'"
+    query = f"SELECT * FROM Player_Game_Stats PGS JOIN Game G ON PGS.game_id = G.game_id WHERE PGS.player_id = '{player_id}'"
     current_app.logger.info(query)
     cursor = db.get_db().cursor()
     cursor.execute(query)
