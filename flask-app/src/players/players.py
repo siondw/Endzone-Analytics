@@ -223,7 +223,7 @@ def get_total_yds_props(player_id):
     the_response.mimetype = 'application/json'
     return the_response
 
-# random yards line
+# random props
 @players.route('/players/random_props', methods=['GET'])
 def get_random_props():
     query = f"SELECT player_name, total_yds_line, total_tds_line, total_yds_odds, total_tds_line FROM Players ORDER BY RAND() LIMIT 1"
