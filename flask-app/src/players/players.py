@@ -242,13 +242,14 @@ def get_game_stats(player_id):
     return the_response
 
 # add a player injury
-@players.route('/players/injuries/<player_id>', methods=['POST'])
-def add_injury(player_id):
+@players.route('/players/injuries', methods=['POST'])
+def add_injury():
    # collecting data from the request object 
     the_data = request.json
     current_app.logger.info(the_data)
 
     #extracting the variable
+    player_id = the_data['player_id']
     injury = the_data['injury']
     duration = the_data['duration']
  
@@ -266,3 +267,15 @@ def add_injury(player_id):
     db.get_db().commit()
 
     return 'Success!'
+
+# delete an injury
+@schedule.route('/players/injuries/<int:injury_id>', methods=['DELETE'])
+def delete_injury(injury_id):
+    
+    # Create a cursor to execute the delete query
+    cursor = db.get_db().cursor()
+    cursor.execute("DELETE FROM Player_Injuries WHERE injury_id = %s", (injury_id,))
+
+    db.get_db().commit()
+
+    return f"Successfully deleted injury!"
