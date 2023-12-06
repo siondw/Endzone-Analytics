@@ -227,7 +227,7 @@ def get_total_yds_props():
 @players.route('/players/game_stats/<name>', methods=['GET'])
 def get_game_stats(name):
     decoded_name = urllib.parse.unquote(name)
-    query = f"SELECT home_team_abbr, away_team_abbr, PGS.* FROM Player_Game_Stats PGS JOIN Game G ON PGS.game_id = G.game_id WHERE player_name = '{decoded_name}'"
+    query = f"SELECT home_team_abbr, away_team_abbr, PGS.* FROM Player_Game_Stats PGS JOIN Game G ON PGS.game_id = G.game_id JOIN Players P On PSG.player_id = P.player_id WHERE player_name = '{decoded_name}'"
     current_app.logger.info(query)
     cursor = db.get_db().cursor()
     cursor.execute(query)
