@@ -223,6 +223,24 @@ def get_total_yds_props(player_id):
     the_response.mimetype = 'application/json'
     return the_response
 
+# random yards line
+@players.route('/players/random_props', methods=['GET'])
+def get_random_props():
+    query = f"SELECT name, total_yds_line, total_tds_line FROM Players ORDER BY RAND() LIMIT 1"
+    current_app.logger.info(query)
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
 # player game stats
 @players.route('/players/game_stats/<player_id>', methods=['GET'])
 def get_game_stats(player_id):
