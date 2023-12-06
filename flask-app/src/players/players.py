@@ -224,13 +224,13 @@ def get_total_yds_props():
     return the_response
 
 # player game stats
-@players.route('/players/game_stats/<name>', methods=['GET'])
-def get_game_stats(name):
-    decoded_name = urllib.parse.unquote(name)
-    query = f"SELECT home_team_abbr, away_team_abbr, PGS.* FROM Player_Game_Stats PGS JOIN Game G ON PGS.game_id = G.game_id JOIN Players P On PGS.player_id = P.player_id WHERE player_name = '{decoded_name}'"
+@players.route('/players/game_stats/<player_id>', methods=['GET'])
+def get_game_stats(player_id):
+    query = f"SELECT home_team_abbr, away_team_abbr, PGS.* FROM Player_Game_Stats PGS JOIN Game G ON PGS.game_id = G.game_id JOIN Players P On PGS.player_id = P.player_id WHERE Players.player_id = '{player_id}'"
     current_app.logger.info(query)
     cursor = db.get_db().cursor()
     cursor.execute(query)
+
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
