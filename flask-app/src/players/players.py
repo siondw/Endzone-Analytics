@@ -43,6 +43,24 @@ def get_players(name):
     the_response.mimetype = 'application/json'
     return the_response
 
+ # Get specific player from the DB using id
+@players.route('/players/<player_id>', methods=['GET'])
+def get_players_with_id(player_id):
+    query = f"SELECT * FROM Players WHERE player_id = '{player_id}'"
+    current_app.logger.info(query)
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
 # passing leaderboard
 @players.route('/players/passing_leaders', methods=['GET'])
 def get_passing_leaderboard():
