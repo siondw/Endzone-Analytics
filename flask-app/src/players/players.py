@@ -44,9 +44,9 @@ def get_players(name):
     return the_response
 
  # Get specific player from the DB using id
-@players.route('/players/<player_id>', methods=['GET'])
+@players.route('/players/use_id/<player_id>', methods=['GET'])
 def get_players_with_id(player_id):
-    query = f"SELECT * FROM Players WHERE player_id = {player_id}"
+    query = f"SELECT * FROM Players WHERE player_id = '{player_id}'"
     current_app.logger.info(query)
     cursor = db.get_db().cursor()
     cursor.execute(query)
