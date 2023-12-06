@@ -169,10 +169,10 @@ def get_rush_touchdown_leaderboard():
     the_response.mimetype = 'application/json'
     return the_response
 
-# player injuries in a game
+# player injuries 
 @players.route('/players/injuries/<player_id>', methods=['GET'])
 def get_player_injuries(player_id):
-    query = f"SELECT player_name, injury, duration FROM Player_Injuries JOIN Players ON Player_Injuries.player_id = Players.player_id WHERE Player_Injuries.player_id = '{player_id}'"
+    query = f"SELECT player_name, injury, duration, injury_id FROM Player_Injuries JOIN Players ON Player_Injuries.player_id = Players.player_id WHERE Player_Injuries.player_id = '{player_id}'"
     current_app.logger.info(query)
     cursor = db.get_db().cursor()
     cursor.execute(query)
@@ -260,7 +260,7 @@ def add_injury():
     query += injury + "', '"
     query += duration + "')"
     current_app.logger.info(query)
-    
+
     # Executing and committing the insert statement 
     cursor = db.get_db().cursor()
     cursor.execute(query)
