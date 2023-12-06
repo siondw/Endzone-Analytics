@@ -152,8 +152,8 @@ def get_rush_touchdown_leaderboard():
     return the_response
 
 # player injuries in a game
-@players.route('/players/injuries', methods=['GET'])
-def get_player_injuries():
+@players.route('/players/injuries/<player_id>', methods=['GET'])
+def get_player_injuries(player_id):
     query = f"SELECT name, injury, duration FROM Player_Injuries JOIN Players ON Player_Injuries.player_id = Players.player_id"
     current_app.logger.info(query)
     cursor = db.get_db().cursor()
