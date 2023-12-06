@@ -279,3 +279,30 @@ def delete_injury(injury_id):
     db.get_db().commit()
 
     return f"Successfully deleted injury!"
+
+# Edit a specific game
+@schedule.route('/players/injuries', methods=['PUT'])
+def update_injury():
+    the_data = request.json
+
+    injury = the_data['injury']
+    duration = the_data['duration']
+    injury_id = the_data['injury_id']
+
+    current_app.logger.info(the_data)
+
+    # Corrected SQL query using parameterized inputs
+    the_query = """
+    UPDATE Player_Injuries 
+    SET injury = %s, duration = %s 
+    WHERE injury_id = %s;
+    """
+
+    current_app.logger.info(the_query)
+
+    # Executing the query with parameters
+    cursor = db.get_db().cursor()
+    cursor.execute(the_query, (injury, duration, injury_id))
+    db.get_db().commit()
+
+    return f"Successfully edited injury #{injury_id}!"
