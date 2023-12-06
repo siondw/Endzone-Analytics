@@ -190,7 +190,7 @@ def get_player_injuries(player_id):
 # TDs line for all players 
 @players.route('/players/total_tds_props/<player_id>', methods=['GET'])
 def get_total_tds_props(player_id):
-    query = f"SELECT total_tds_line FROM Players WHERE player_id = '{player_id}'"
+    query = f"SELECT total_tds_line, total_tds_odds FROM Players WHERE player_id = '{player_id}'"
     current_app.logger.info(query)
     cursor = db.get_db().cursor()
     cursor.execute(query)
@@ -208,7 +208,7 @@ def get_total_tds_props(player_id):
 # yards line for all players
 @players.route('/players/total_yds_props/<player_id>', methods=['GET'])
 def get_total_yds_props(player_id):
-    query = f"SELECT total_yds_line FROM Players WHERE player_id = '{player_id}'"
+    query = f"SELECT total_yds_line, total_yds_odds FROM Players WHERE player_id = '{player_id}'"
     current_app.logger.info(query)
     cursor = db.get_db().cursor()
     cursor.execute(query)
@@ -226,7 +226,7 @@ def get_total_yds_props(player_id):
 # random yards line
 @players.route('/players/random_props', methods=['GET'])
 def get_random_props():
-    query = f"SELECT name, total_yds_line, total_tds_line FROM Players ORDER BY RAND() LIMIT 1"
+    query = f"SELECT player_name, total_yds_line, total_tds_line, total_yds_odds, total_tds_line FROM Players ORDER BY RAND() LIMIT 1"
     current_app.logger.info(query)
     cursor = db.get_db().cursor()
     cursor.execute(query)
