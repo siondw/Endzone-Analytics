@@ -298,7 +298,7 @@ def delete_injury(injury_id):
 
     return f"Successfully deleted injury!"
 
-# Edit a specific game
+# edit an injury
 @players.route('/players/injuries', methods=['PUT'])
 def update_injury():
     the_data = request.json
