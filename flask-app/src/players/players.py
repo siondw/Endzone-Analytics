@@ -269,7 +269,7 @@ def add_injury():
     return 'Success!'
 
 # delete an injury
-@schedule.route('/players/injuries/<int:injury_id>', methods=['DELETE'])
+@players.route('/players/injuries/<int:injury_id>', methods=['DELETE'])
 def delete_injury(injury_id):
     
     # Create a cursor to execute the delete query
@@ -281,7 +281,7 @@ def delete_injury(injury_id):
     return f"Successfully deleted injury!"
 
 # Edit a specific game
-@schedule.route('/players/injuries', methods=['PUT'])
+@players.route('/players/injuries', methods=['PUT'])
 def update_injury():
     the_data = request.json
 
