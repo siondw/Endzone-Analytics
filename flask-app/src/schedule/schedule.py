@@ -167,7 +167,7 @@ def add_new_game():
     return 'Success!'
 
 # Get all highlights for a game
-@teams.route('/highlights/<game_id>', methods=['GET'])
+@schedule.route('/highlights/<game_id>', methods=['GET'])
 def get_highlights(game_id):
 
     query = f"SELECT * FROM Game_Highlight WHERE game_id =  '{game_id}'"
@@ -187,7 +187,7 @@ def get_highlights(game_id):
     return the_response
 
 # Get all plays for a game
-@teams.route('/plays/<game_id>', methods=['GET'])
+@schedule.route('/plays/<game_id>', methods=['GET'])
 def get_play_by_play(game_id):
 
     query = f"SELECT * FROM Play_by_Play WHERE game_id =  '{game_id}'"
@@ -208,7 +208,7 @@ def get_play_by_play(game_id):
 
 
 # Get game summary
-@teams.route('/game/<game_id>', methods=['GET'])
+@schedule.route('/game/<game_id>', methods=['GET'])
 def get_home_team(game_id):
     query = f"SELECT game_id, winner, loser, home_score, away_score, yards_leader, td_leader, pass_yds_leader, week_num FROM Game WHERE game_id =  '{game_id}'"
     current_app.logger.info(query)
