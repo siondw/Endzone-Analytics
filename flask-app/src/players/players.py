@@ -154,7 +154,7 @@ def get_rush_touchdown_leaderboard():
 # player injuries in a game
 @players.route('/players/injuries/<player_id>', methods=['GET'])
 def get_player_injuries(player_id):
-    query = f"SELECT player_name, injury, duration FROM Player_Injuries JOIN Players ON Player_Injuries.player_id = Players.player_id WHERE player_id = '{player_id}'"
+    query = f"SELECT player_name, injury, duration FROM Player_Injuries JOIN Players ON Player_Injuries.player_id = Players.player_id WHERE Player_Injuries.player_id = '{player_id}'"
     current_app.logger.info(query)
     cursor = db.get_db().cursor()
     cursor.execute(query)
@@ -206,7 +206,7 @@ def get_total_yds_props():
     return the_response
 
 # player game stats
-@players.route('/players/game_stats', methods=['GET'])
+@players.route('/players/game_stats/<name>', methods=['GET'])
 def get_game_stats(name):
     decoded_name = urllib.parse.unquote(name)
     query = f"SELECT home_team_abbr, away_team_abbr, PGS.* FROM Player_Game_Stats PGS JOIN Game G ON PGS.game_id = G.game_id WHERE player_name = '{decoded_name}'"
