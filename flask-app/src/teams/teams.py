@@ -21,7 +21,7 @@ def get_standings_NFC():
     the_response.mimetype = 'application/json'
     return the_response
 
-# Get standings for NFC
+# Get standings for AFC
 @teams.route('/standings/AFC', methods=['GET'])
 def get_standings_AFC():
     cursor = db.get_db().cursor()
