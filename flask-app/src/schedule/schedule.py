@@ -144,9 +144,6 @@ def add_new_game():
     week_num = the_data['week_num']
     ticket_price = the_data['ticket_price']
 
-
-
-
    # Constructing the query with manual quotes for string fields
     query = 'INSERT INTO Game (home_team_abbr, away_team_abbr, winner, loser, home_score, away_score, yards_leader, td_leader, pass_yds_leader, week_num, ticket_price) VALUES ('
     query += "'" + home_team_abbr + "', '"
@@ -168,3 +165,63 @@ def add_new_game():
     db.get_db().commit()
 
     return 'Success!'
+
+# Get all highlights for a game
+@teams.route('/highlights/<game_id>', methods=['GET'])
+def get_highlights(game_id):
+
+    query = f"SELECT * FROM Game_Highlight WHERE game_id =  '{game_id}'"
+    current_app.logger.info(query)
+
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+# Get all plays for a game
+@teams.route('/plays/<game_id>', methods=['GET'])
+def get_play_by_play(game_id):
+
+    query = f"SELECT * FROM Play_by_Play WHERE game_id =  '{game_id}'"
+    current_app.logger.info(query)
+
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+
+# Get game summary
+@teams.route('/game/<game_id>', methods=['GET'])
+def get_home_team(game_id):
+    query = f"SELECT game_id, winner, loser, home_score, away_score, yards_leader, td_leader, pass_yds_leader, week_num FROM Game WHERE game_id =  '{game_id}'"
+    current_app.logger.info(query)
+
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
