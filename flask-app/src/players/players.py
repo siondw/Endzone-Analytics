@@ -256,11 +256,11 @@ def add_injury():
 
    # Constructing the query with manual quotes for string fields
     query =  'INSERT INTO Player_Injuries (player_id, injury, duration) VALUES ('
-    query += "'" + player_id + "', '"
+    query += str(player_id) + ", '"  # No quotes around integer
     query += injury + "', '"
-    query += duration + ')'
+    query += duration + "')"
     current_app.logger.info(query)
-
+    
     # Executing and committing the insert statement 
     cursor = db.get_db().cursor()
     cursor.execute(query)
