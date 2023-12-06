@@ -8,7 +8,7 @@ players = Blueprint('players', __name__)
 # Get all player names
 @players.route('/players/all_names', methods=['GET'])
 def get_player_names():
-    query = f"SELECT player_name FROM Players ORDER BY player_name"
+    query = f"SELECT DISTINCT player_name FROM Players ORDER BY player_name"
     current_app.logger.info(query)
     cursor = db.get_db().cursor()
     cursor.execute(query)
