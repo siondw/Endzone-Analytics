@@ -43,6 +43,11 @@ Summary: This project is an NFL (National Football League) Statistic and Betting
 - Backend: Flask
 - Database: MySQL
 
+### Links
+
+- Appsmith Repo: Link is [here](https://github.com/siondw/EA_Appsmith)
+- Backend Repo: Link is [here](https://github.com/siondw/Endzone-Analytics)
+- Demo Video: Link is [here](https://m.youtube.com/watch?v=YfkxJAHMxl8&feature=youtu.be)
 
 
 
